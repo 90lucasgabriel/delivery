@@ -143,7 +143,13 @@ return [
         CodeDelivery\Providers\AppServiceProvider::class,
         CodeDelivery\Providers\AuthServiceProvider::class,
         CodeDelivery\Providers\EventServiceProvider::class,
-        CodeDelivery\Providers\RouteServiceProvider::class,
+        CodeDelivery\Providers\RouteServiceProvider::class,        
+        CodeDelivery\Providers\RepositoryServiceProvider::class,
+
+        /*
+         * Vendor Providers
+         */
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
     ],
 
