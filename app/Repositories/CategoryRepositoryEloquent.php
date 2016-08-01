@@ -5,6 +5,7 @@ namespace CodeDelivery\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\CategoryRepository;
+use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Models\Category;
 use CodeDelivery\Validators\CategoryValidator;
 
@@ -22,6 +23,10 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     public function model()
     {
         return Category::class;
+    }
+
+    public function lists($column, $key=null){
+        return $this->model->lists($column, $key);
     }
 
     
