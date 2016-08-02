@@ -25,6 +25,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' => 'ad
 		Route::get('', 				['as' => 'index', 	'uses' => 'CategoriesController@index']);
 	});
 
+	Route::group(['prefix' => 'clients', 'as' => 'clients.'], function(){
+		Route::get('edit/{id}', 	['as' => 'edit', 	'uses' => 'ClientsController@edit']);
+		Route::post('update/{id}', 	['as' => 'update', 	'uses' => 'ClientsController@update']);
+		Route::get('destroy/{id}', 	['as' => 'destroy',	'uses' => 'ClientsController@destroy']);
+		Route::get('create', 		['as' => 'create', 	'uses' => 'ClientsController@create']);
+		Route::post('store', 		['as' => 'store', 	'uses' => 'ClientsController@store']);
+		Route::get('', 				['as' => 'index', 	'uses' => 'ClientsController@index']);
+	});
+
 	Route::group(['prefix' => 'products', 'as' => 'products.'], function(){
 		Route::get('edit/{id}', 	['as' => 'edit', 	'uses' => 'ProductsController@edit']);
 		Route::post('update/{id}', 	['as' => 'update', 	'uses' => 'ProductsController@update']);

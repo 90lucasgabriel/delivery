@@ -30,9 +30,7 @@ class UserTableSeeder extends Seeder
             'remember_token' => str_random(10)
         ]);
         factory(User::class, 10)->create()->each(function($u){
-            for($i=0; $i<5; $i++){
-                $u->client()->save(factory(Client::class)->make());
-            }
+            $u->client()->save(factory(Client::class)->make());
         });
     }
 }
