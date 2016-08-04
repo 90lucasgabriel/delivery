@@ -24,7 +24,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    
+    public function queryDeliveryman($column, $key=null){
+        return $this->model->where(['role'=>'deliveryman'])->lists($column, $key);
+    }
 
     /**
      * Boot up the repository, pushing criteria
