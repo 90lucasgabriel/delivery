@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call(UserTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
+        $this->call(CouponTableSeeder::class);
         $this->call(OrderTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Model::reguard();

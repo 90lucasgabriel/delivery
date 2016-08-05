@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 	<div class="container">
-		<h3>Categories</h3>
+		<h3>Produtos</h3>
 		
 		<a href="{{ route('admin.products.create') }}" class="btn btn-default">Novo Produto</a>	
 		<br /><br />

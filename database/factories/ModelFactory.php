@@ -19,11 +19,18 @@ $factory->define(CodeDelivery\Models\Category::class, function (Faker\Generator 
 
 $factory->define(CodeDelivery\Models\Client::class, function (Faker\Generator $faker) {
     return [
-        'phone'         => $faker->phoneNumber,
-        'address'       => $faker->address,
-        'city'          => $faker->city,
-        'state'         => $faker->state,
-        'zipcode'       => $faker->postcode,
+        'phone'             => $faker->phoneNumber,
+        'address'           => $faker->address,
+        'city'              => $faker->city,
+        'state'             => $faker->state,
+        'zipcode'           => $faker->postcode,
+    ];
+});
+
+$factory->define(CodeDelivery\Models\Coupon::class, function (Faker\Generator $faker) {
+    return [
+        'code'              => rand(100, 10000),
+        'value'             => rand(50, 100)
     ];
 });
 
@@ -49,9 +56,9 @@ $factory->define(CodeDelivery\Models\Product::class, function (Faker\Generator $
 
 $factory->define(CodeDelivery\Models\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'name'              => $faker->name,
+        'email'             => $faker->safeEmail,
+        'password'          => bcrypt(str_random(10)),
+        'remember_token'    => str_random(10),
     ];
 });

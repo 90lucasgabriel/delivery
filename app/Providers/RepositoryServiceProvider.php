@@ -16,6 +16,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \CodeDelivery\Repositories\ClientRepositoryEloquent::class
         );
         $this->app->bind(
+            \CodeDelivery\Repositories\CouponRepository::class, 
+            \CodeDelivery\Repositories\CouponRepositoryEloquent::class
+        );
+        $this->app->bind(
             \CodeDelivery\Repositories\OrderRepository::class, 
             \CodeDelivery\Repositories\OrderRepositoryEloquent::class
         );
