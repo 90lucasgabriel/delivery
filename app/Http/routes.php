@@ -1,20 +1,34 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', function () {
 	return view('welcome');
 });
 
+//API ------------------------------------------------------------------------------------------
+
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
+
+Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function(){
+	Route::group(['prefix' => 'clients', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'], function(){
+		Route::resource('orders', 'Api\ClientCheckoutController', ['except' => ['create', 'edit', 'destroy']]);
+	});
+
+	Route::group(['prefix' => 'deliverymen', 'middleware' => 'oauth.checkrole:deliveryman', 'as' => 'deliverymen.'], function(){
+		Route::get('pedidos', function(){
+			return [
+				'id' 	=> 1,
+				'name' 	=> 'Deliveryman',
+				'total'	=> 21
+			];
+		});
+	});
+});
+
+
+
+//ADMIN ------------------------------------------------------------------------------------------
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.checkrole:admin', 'as' => 'admin.'], function(){
 	Route::group(['prefix' => 'categories', 'as' => 'categories.'], function(){
@@ -71,16 +85,3 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth.checkrole:client', '
 });
 
 
-Route::post('oauth/access_token', function() {
-    return Response::json(Authorizer::issueAccessToken());
-});
-
-Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function(){
-	Route::get('pedidos', function(){
-		return [
-			'id' 	=> 1,
-			'name' 	=> 'User Name',
-			'total'	=> 21
-		];
-	});
-});

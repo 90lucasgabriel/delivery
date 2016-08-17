@@ -21,6 +21,10 @@ class Order extends Model implements Transformable
         return $this->belongsTo(Client::class);
     }
 
+    public function coupon(){
+        return $this->belongsTo(Coupon::class);
+    }
+
     public function items(){
         return $this->hasMany(OrderItem::class);
     }
