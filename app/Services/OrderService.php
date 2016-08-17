@@ -5,6 +5,7 @@ use CodeDelivery\Http\Requests;
 use CodeDelivery\Repositories\CouponRepository;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\ProductRepository;
+use CodeDelivery\Models\Order;
 
 class OrderService{
     private $couponRepository;
@@ -56,5 +57,16 @@ class OrderService{
             \DB::rollback();
             throw $e;
         }
+    }
+
+    public function updateStatus($orderId, $deliverymanId, $status){
+        $order = $this->orderRepository->getByIdAndDeliveryman($orderId, $deliverymanId);
+        if($order instanceOf Order){
+            $order->status = $status;
+            $order->save();
+            return $order;
+        }
+
+        return false;
     }
 }

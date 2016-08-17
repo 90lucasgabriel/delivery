@@ -34,6 +34,14 @@ $factory->define(CodeDelivery\Models\Coupon::class, function (Faker\Generator $f
     ];
 });
 
+$factory->define(CodeDelivery\Models\OauthClient::class, function (Faker\Generator $faker) {
+    return [
+        'id'                => $faker->name,
+        'secret'            => $faker->name,
+        'name'              => $faker->name
+    ];
+});
+
 $factory->define(CodeDelivery\Models\Order::class, function (Faker\Generator $faker) {
     return [
         'client_id'         => rand(1,10),
