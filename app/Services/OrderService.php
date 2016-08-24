@@ -25,6 +25,11 @@ class OrderService{
         \DB::beginTransaction();
         try{
             $data['status'] = 0;
+
+            if(isset($data['coupon_id'])){
+                unset($data['coupon_id']);
+            }
+
             if(isset($data['coupon_code'])){
                 $coupon = $this->couponRepository->findByField('code', $data['coupon_code'])->first();
                 $data['coupon_id'] = $coupon->id;

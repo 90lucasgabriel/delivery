@@ -3,8 +3,10 @@
 namespace CodeDelivery\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use CodeDelivery\Presenters\OrderPresenter;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Models\Order;
 use CodeDelivery\Validators\OrderValidator;
@@ -15,6 +17,7 @@ use CodeDelivery\Validators\OrderValidator;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
+    protected $skipPresenter = true;
 
     public function getByIdAndDeliveryman($orderId, $deliverymanId){
         $result = $this->with(['client', 'coupon','items'])->findWhere([
@@ -22,11 +25,18 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
             'user_deliveryman_id'   => $deliverymanId
         ]);
         
-        $result = $result->first();
-        if($result){
-            $result->items->each(function($item){
-                $item->product;
-            });
+        if($result instanceOf Collection){
+            $result = $result->first();
+        }
+        else{
+            if(isset($result['data']) && count($result['data'])==1){
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+            else{
+                throw new ModelNotFoundException('Order nao existe');
+            }
         }
 
         return $result;
@@ -50,5 +60,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter(){
+        return OrderPresenter::class;
     }
 }

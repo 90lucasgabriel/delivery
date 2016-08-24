@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class DeliverymancheckoutController extends Controller{
+    private $with = ['client', 'coupon', 'items'];
     private $orderRepository;
     private $userRepository;
     private $orderService;
@@ -25,16 +26,22 @@ class DeliverymancheckoutController extends Controller{
 
     public function index(){
         $id = Authorizer::getResourceOwnerId();
-        $orders = $this->orderRepository->with(['items'])->scopeQuery(function($query) use($id){
-            return $query->where('user_deliveryman_id', '=', $id);
-        })->paginate();
+        $orders = $this->orderRepository
+            ->skipPresenter(false)
+            ->with($this->with)
+            ->scopeQuery(function($query) use($id){
+                return $query->where('user_deliveryman_id', '=', $id);
+            }
+        )->paginate();
 
         return $orders;
     }
 
     public function show($orderId){        
         $deliverymanId = Authorizer::getResourceOwnerId();
-        return $this->orderRepository->getByIdAndDeliveryman($orderId, $deliverymanId);
+        return $this->orderRepository
+            ->skipPresenter(false)
+            ->getByIdAndDeliveryman($orderId, $deliverymanId);
     }
 
     public function updateStatus(Request $request, $orderId){
@@ -42,7 +49,7 @@ class DeliverymancheckoutController extends Controller{
         $order = $this->orderService->updateStatus($orderId, $deliverymanId, $request->get('status'));
 
         if($order){
-            return $order;
+            return $this->orderRepository->find($order->id);
         }
         abort(400, "Pedido não encontrado");
     }
