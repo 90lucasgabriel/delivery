@@ -19,6 +19,10 @@ Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], funct
 		Route::resource('orders', 'Api\DeliverymanCheckoutController', ['except' => ['create', 'edit', 'destroy', 'store']]);
 		Route::patch('orders/{id}/update-status', ['as' => 'orders.update-status', 'uses' => 'Api\DeliverymanCheckoutController@updateStatus']);
 	});
+
+	Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
+		Route::get('authenticated', ['as' => '.authenticated', 'uses' => 'Api\UsersController@authenticated']);
+	});
 });
 
 
