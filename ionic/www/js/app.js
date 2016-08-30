@@ -17,26 +17,30 @@ angular.module('app', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider){
-  $stateProvider
-  .state('home', {
-    url: '/home/:name',
-    templateUrl: 'templates/home.html',
-    controllerAs: 'vm',
-    controller: 'HomeController'
-  })
-    .state('home.a', {
-      url: '/a',
-      templateUrl: 'templates/home-a.html'
-    })
+.config(function(
+    $stateProvider, $urlRouterProvider,
+    OAuthProvider, OAuthTokenProvider
+){
 
-  .state('main', {
-    url: '/main',
-    templateUrl: 'templates/main.html'
-  })
-    .state('main.a', {
-      url: '/a',
-      templateUrl: 'templates/main-a.html'
-    });
+  OAuthProvider.configure({
+    baseUrl: 'http://localhost:8000',
+    clientId: 'appid1',
+    clientSecret: 'secret' // optional
+  });
+
+  OAuthTokenProvider.configure({
+    name: 'token',
+    options: {
+      secure: false
+    }
+  });
+
+  $stateProvider
+  .state('login', {
+    url:          '/login',
+    templateUrl:  'templates/login.html',
+    controller:   'LoginController',
+    controllerAs: 'vm',
+  });
   $urlRouterProvider.otherwise('/');
 });

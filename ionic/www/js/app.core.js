@@ -8,5 +8,6 @@
 		// 'ngSanitize',
 		// 3rd-party modules
 		// 'ui.router',
+		'angular-oauth2'
 	]);
 })();
