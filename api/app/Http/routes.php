@@ -6,24 +6,29 @@ Route::get('/', function () {
 
 //API ------------------------------------------------------------------------------------------
 
-Route::post('oauth/access_token', function() {
-    return Response::json(Authorizer::issueAccessToken());
+
+
+Route::group(['middleware' => 'cors'], function(){
+	Route::post('oauth/access_token', function() {
+	    return Response::json(Authorizer::issueAccessToken());
+	});
+	
+	Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function(){
+		Route::group(['prefix' => 'clients', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'], function(){
+			Route::resource('orders', 'Api\ClientCheckoutController', ['except' => ['create', 'edit', 'destroy']]);
+		});
+
+		Route::group(['prefix' => 'deliverymen', 'middleware' => 'oauth.checkrole:deliveryman', 'as' => 'deliverymen.'], function(){
+			Route::resource('orders', 'Api\DeliverymanCheckoutController', ['except' => ['create', 'edit', 'destroy', 'store']]);
+			Route::patch('orders/{id}/update-status', ['as' => 'orders.update-status', 'uses' => 'Api\DeliverymanCheckoutController@updateStatus']);
+		});
+
+		Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
+			Route::get('authenticated', ['as' => '.authenticated', 'uses' => 'Api\UsersController@authenticated']);
+		});
+	});
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function(){
-	Route::group(['prefix' => 'clients', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'], function(){
-		Route::resource('orders', 'Api\ClientCheckoutController', ['except' => ['create', 'edit', 'destroy']]);
-	});
-
-	Route::group(['prefix' => 'deliverymen', 'middleware' => 'oauth.checkrole:deliveryman', 'as' => 'deliverymen.'], function(){
-		Route::resource('orders', 'Api\DeliverymanCheckoutController', ['except' => ['create', 'edit', 'destroy', 'store']]);
-		Route::patch('orders/{id}/update-status', ['as' => 'orders.update-status', 'uses' => 'Api\DeliverymanCheckoutController@updateStatus']);
-	});
-
-	Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
-		Route::get('authenticated', ['as' => '.authenticated', 'uses' => 'Api\UsersController@authenticated']);
-	});
-});
 
 
 

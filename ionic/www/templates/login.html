@@ -1,16 +1,19 @@
 <ion-view>
 	<ion-nav-title>Login</ion-nav-title>
-	<ion-content class="padding">
-		<form name="form">
+	<ion-content class="has-header padding">
+		<form name="form" ng-submit="vm.login()">
 			<div class="list list-inset">
-				<label class="item item-input" for="username">
-					<input ng-model="user.username" placeholder="Usuário" type="text" name="username"  />
-				</label>
+				<label class="item item-input input-calm">
+	                <span class="input-label">Usuário</span>
+	                <input type="text" ng-model="vm.user.username" required />
+	            </label>
+	            <label class="item item-input input-calm">
+	                <span class="input-label">Senha</span>
+	                <input type="password" ng-model="vm.user.password" required />
+	            </label>
 			</div>
-			<div class="list list-inset">
-				<label class="item item-input" for="password">
-					<input ng-model="user.password" placeholder="Senha" type="text" name="username"  />
-				</label>
+			<div class="padding">
+				<button type="submit" class="button button-full button-assertive">Login</button>
 			</div>
 		</form>
 	</ion-content>
