@@ -3,26 +3,28 @@
 namespace CodeDelivery\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use CodeDelivery\Models\Coupon;
+use CodeDelivery\Models\User;
 
 /**
- * Class CouponTransformer
+ * Class UserTransformer
  * @package namespace CodeDelivery\Transformers;
  */
-class CouponTransformer extends TransformerAbstract
+class DeliverymanTransformer extends TransformerAbstract
 {
 
     /**
-     * Transform the \Coupon entity
-     * @param \Coupon $model
+     * Transform the \User entity
+     * @param \User $model
      *
      * @return array
      */
-    public function transform(Coupon $model)
+    public function transform(User $model)
     {
         return [
             'id'         => (int) $model->id,
-            'code'       => $model->code,
+            'name'       => $model->name,
+            'email'      => $model->email,
+            'role'       => $model->role,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
