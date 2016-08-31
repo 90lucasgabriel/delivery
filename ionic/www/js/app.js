@@ -10,7 +10,6 @@
 
   angular.module('app.controllers', []);
 
-
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,14 +20,13 @@
         StatusBar.styleDefault();
       }
     });
-  })
+  }); 
 
 
   app.config(function(
       $stateProvider, $urlRouterProvider,
       OAuthProvider, OAuthTokenProvider
   ){
-
     OAuthProvider.configure({
       baseUrl:      'http://localhost:8000',
       clientId:     'appid1',
