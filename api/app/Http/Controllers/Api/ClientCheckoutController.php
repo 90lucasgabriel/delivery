@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
-class ClientcheckoutController extends Controller{
+class ClientCheckoutController extends Controller{
     private $with = ['client', 'coupon', 'items'];
     private $orderRepository;
     private $productRepository;

@@ -1,0 +1,36 @@
+<ion-view view-title="Checkout">
+	<ion-nav-title>Pedido</ion-nav-title>
+	<div class="bar bar-subheader bar-stable">
+		<button class="button button-clear button-ion ion-minus-circled" ng-click="vm.showDelete = !vm.showDelete"></button>		
+		<h2 class="title">Checkout</h2>
+		<button class="button button-clear button-ion ion-plus" ng-click="vm.productList()"></button>
+	</div>
+	
+	<!--
+	<ion-nav-buttons side="primary">
+      <button class="button button-clear icon ion-minus-circled" ng-click="vm.showDelete = !vm.showDelete">
+      </button>
+    </ion-nav-buttons>
+    -->
+	<ion-content class="has-header has-subheader has-subfooter">
+		<ion-list show-delete="vm.showDelete">
+			<ion-item ng-repeat="item in vm.items" ng-click="vm.productDetails(item)">
+				<div class="row">
+					<div class="col-50">
+						<h2>{{item.name}}</h2>
+						<h4>R$ {{item.price}}</h4>
+					</div>
+					<div class="col">{{item.quantity}}</div>
+					<div class="col text-right">R$ {{item.price * item.quantity}}</div>
+				</div>
+				<ion-delete-button class="ion ion-minus-circled" ng-click="vm.remove(item)"></ion-delete-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	<ion-footer-bar align-title="left">
+		<h1 class="title">Total: R$ {{vm.total}}</h1>
+		<div class="buttons" ng-click="vm.saveOrder(vm.items)">
+			<button class="button button-assertive">Finalizar Pedido</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

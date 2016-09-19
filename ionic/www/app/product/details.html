@@ -1,0 +1,29 @@
+<ion-view view-title="Produto">
+	<ion-nav-title>Produto</ion-nav-title>
+	<ion-content padding="true" class="has-header has-subfooter">
+		<div class="list card">
+			<div class="item item-avatar">
+				<h2>{{vm.product.name}}</h2>
+				<p>Quantidade: {{vm.product.quantity}}</p>
+				<p>R$ {{vm.product.price}}</p>
+			</div>
+
+			<div class="item item-body">
+				<h2>Descrição</h2>
+				<p>{{vm.product.description}}</p>
+			</div>
+
+			<label for="" class="item item-input">
+				<span class="input-label">Quantidade</span>
+				<input type="text" placeholder="Quantidade" ng-model="vm.product.quantity">
+			</label>
+		</div>
+	</ion-content>
+	<ion-footer-bar align-title="left">
+		<h1 class="title">Carrinho: R$ {{vm.cart.total}}</h1>
+		<div class="buttons">
+			<button class="button button-assertive" ng-click="vm.addCart(vm.product)" ng-if="vm.buttonAdd">Comprar</button>
+			<button class="button button-assertive" ng-click="vm.updateQuantity(vm.product, vm.product.quantity)" ng-if="!vm.buttonAdd">Atualizar Quantidade</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view view-title="Produtos">
+
+	<ion-content class="has-header has-footer">
+		<ion-list>
+			<ion-item ng-repeat="product in vm.products">
+				<div class="row">
+					<div class="col-75" ng-click="vm.addCart(product)">
+						<h2>{{product.name}}</h2>
+					</div>
+						<div class="col">R$ {{product.price}}</div>
+						<div class="col text-right" style="color: #ACACAC" ng-click="vm.details(product)"> <i class="icon ion-information-circled"></i> </div>
+					</div>	
+			</ion-item>
+		</ion-list>		
+	</ion-content>
+	<ion-footer-bar align-title="left">
+		<h1 class="title">Carrinho: R$ {{vm.cart.total}}</h1>
+		<div class="buttons">
+			<button class="button button-assertive" ng-click="vm.checkoutList()">Ver Carrinho</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

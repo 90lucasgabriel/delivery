@@ -1,8 +1,9 @@
 (function () {
 	"use strict";
 
-	var app = angular.module('app.controllers');
-	app.controller('LoginController', LoginController);
+	angular
+		.module('app.login')
+		.controller('LoginController', LoginController);
 
 	LoginController.$inject = [
 		'$state',
@@ -28,7 +29,7 @@
 		function login(){
 			OAuth.getAccessToken(vm.user).then(
 				function(data){
-					$state.go('home');
+					$state.go('products.list');
 				}, 
 				function(response){
 					$ionicPopup.alert({
