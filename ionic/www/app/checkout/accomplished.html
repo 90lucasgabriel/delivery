@@ -15,6 +15,14 @@
 					<div class="col text-right">R$ {{item.price * item.quantity}}</div>
 				</div>
 			</ion-item>
+			<ion-item class="ion-icon-left" style="border-bottom: 0; font-weight: bold">
+				<div class="row bar-stable" ng-show="vm.coupon.value != null">
+					<div class="col">
+						<span>CUPOM: {{vm.coupon.code}}</span>
+					</div>
+					<div class="col text-right">- R$ {{vm.coupon.value}}</div>
+				</div>
+			</ion-item>
 		</ion-list>
 	</ion-content>
 	<ion-footer-bar align-title="left">

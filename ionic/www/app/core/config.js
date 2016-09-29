@@ -6,23 +6,33 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl: 'http://localhost:8000',
+      baseUrl: 'http://192.168.1.103:8000',
       appTitle: 'Angular Modular Demo',
       version: '1.0.0'
   };
 
   core.constant('appConfig', appConfig);
 
+
+  //Inject ------------------------------------------
   run.$inject = ['$ionicPlatform'];
+  
   configure.$inject = [
+    '$provide',
     'OAuthProvider', 'OAuthTokenProvider', 
     'appConfig'
-  ];  
+  ];
+  
+  oauthTokenLocal.$inject = [
+    '$delegate', 
+    '$localStorage'
+  ];
 
 
   //------------------------------------------------
 
   function configure(
+    $provide,
     OAuthProvider, OAuthTokenProvider, 
     appConfig
   ){
@@ -39,6 +49,8 @@
         secure: false
       }
     });
+
+    $provide.decorator('OAuthToken', oauthTokenLocal);    
   } 
 
   function run($ionicPlatform) {
@@ -52,5 +64,41 @@
       }
     });
   }; 
+
+  
+
+  function oauthTokenLocal(
+    $delegate,
+    $localStorage
+  ){
+    Object.defineProperties($delegate, {
+      setToken: {
+        value: function(data) {
+          return $localStorage.setObject('token', data);
+        },
+        enumerable   : true,
+        configurable : true,
+        writable     : true
+      },
+      getToken: {
+        value: function() {
+          return $localStorage.getObject('token');
+        },
+        enumerable   : true,
+        configurable : true,
+        writable     : true
+      },
+      removeToken: {
+        value: function() {
+          $localStorage.setObject('token', null);
+        },
+        enumerable   : true,
+        configurable : true,
+        writable     : true
+      }
+    });
+    return $delegate;
+  }
+
 
 })();

@@ -22,6 +22,9 @@
       addItem        : addItem,
       removeItem     : removeItem,
       updateQuantity : updateQuantity,
+      getTotal       : getTotal,
+      setCoupon      : setCoupon,
+      removeCoupon   : removeCoupon,
     };
 
     return service;
@@ -36,7 +39,11 @@
     function clear(){
     	$localStorage.setObject(key,{
     		items: [],
-    		total: 0
+    		total: 0,
+            coupon: {
+                code: null,
+                value: null
+            }
     	});
     }
 
@@ -75,14 +82,14 @@
     		item.subtotal = subTotal(item);
     		cart.items.push(item);
     	}
-    	cart.total = getTotal(cart.items);
+    	cart.total = getSubtotalSum(cart.items);
     	$localStorage.setObject(key, cart);
     }
 
     function removeItem(item){
     	var cart = get();
     	cart.items.splice(cart.items.indexOf(item), 1);
-    	cart.total = getTotal(cart.items);
+    	cart.total = getSubtotalSum(cart.items);
     	$localStorage.setObject(key, cart);
     }
 
@@ -97,25 +104,53 @@
             }
         });
 
-    	itemAux.quantity = quantity;
-    	itemAux.subtotal = subTotal(itemAux);
-    	cart.total = getTotal(cart.items);
-    	$localStorage.setObject(key, cart);
+        itemAux.quantity = quantity;
+        itemAux.subtotal = subTotal(itemAux);
+        cart.total = getSubtotalSum(cart.items);
+        $localStorage.setObject(key, cart);
     }
 
 
-    //------------------------------
+    //Coupon
+    function getTotal(){
+        var cart = this.get();
+        return cart.total - (cart.coupon.value || 0);
+    }
+
+    function setCoupon(code, value){
+        var cart = this.get();
+        cart.coupon = {
+            code: code,
+            value: value
+        };
+
+        $localStorage.setObject(key, cart);
+    }
+
+    function removeCoupon(){
+        var cart = this.get();
+        cart.coupon = {
+            code: null,
+            value: null
+        };
+
+        $localStorage.setObject(key, cart);
+    }
+
+
+
+    //Private functions ---------------------------------
     function activate(){
 	    if(!cartAux){
 	    	clear();
-	    }   
+	    }
     }
 
     function subTotal(item){
     	return item.price * item.quantity;
     }
 
-    function getTotal(items){
+    function getSubtotalSum(items){
     	var sum = 0;
     	angular.forEach(items, function(item){
 			sum += item.subtotal;

@@ -26,10 +26,12 @@
 
 		//------------------------------
 		function activate(){			
-			cart = $cart.get();
-			vm.items = cart.items;
-			vm.total = cart.total;
-			$cart.clear();
+			cart      = $cart.get();
+			vm.coupon = cart.coupon;
+			vm.items  = cart.items;
+			vm.total  = $cart.getTotal();
+
+			//$cart.clear();
 		}
 
 		function productDetails(item) {

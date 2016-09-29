@@ -36,7 +36,8 @@
                     url          : '/accomplished',
                     templateUrl  : 'app/checkout/accomplished.html',
                     controller   : 'CheckoutAccomplishedController',
-                    controllerAs : 'vm'
+                    controllerAs : 'vm',
+                    cache        : false,
                 }
             }
         ];

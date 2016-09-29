@@ -1,7 +1,7 @@
 <ion-view view-title="Checkout">
 	<ion-nav-title>Pedido</ion-nav-title>
 	<div class="bar bar-subheader bar-stable">
-		<button class="button button-clear button-ion ion-minus-circled" ng-click="vm.showDelete = !vm.showDelete"></button>		
+		<button class="button button-clear button-ion ion-minus-circled" ng-click="vm.showDelete = !vm.showDelete" ng-class="{'button-assertive': vm.showDelete, '': !vm.showDelete}"></button>		
 		<h2 class="title">Checkout</h2>
 		<button class="button button-clear button-ion ion-plus" ng-click="vm.productList()"></button>
 	</div>
@@ -12,8 +12,8 @@
       </button>
     </ion-nav-buttons>
     -->
-	<ion-content class="has-header has-subheader has-subfooter">
-		<ion-list show-delete="vm.showDelete">
+	<ion-content class="has-header has-subheader has-footer">
+		<ion-list show-delete="vm.showDelete">			
 			<ion-item ng-repeat="item in vm.items" ng-click="vm.productDetails(item)">
 				<div class="row">
 					<div class="col-50">
@@ -25,12 +25,26 @@
 				</div>
 				<ion-delete-button class="ion ion-minus-circled" ng-click="vm.remove(item)"></ion-delete-button>
 			</ion-item>
+			<ion-item class="ion-icon-left" style="border-bottom: 0">
+				<div class="row bar-stable" ng-show="vm.coupon.value != null">
+					<div class="col">
+						<span class="icon ion-close" ng-click="vm.couponRemove()" ng-show="!vm.showDelete"></span>
+						<span>Cupom: {{vm.coupon.code}}</span>
+					</div>
+					<div class="col text-right">- R$ {{vm.coupon.value}}</div>
+				</div>
+				<div class="row"  ng-show="vm.coupon.value == null">
+					<div class="col text-center">
+						<button class="button button-stable" ng-click="vm.barcodeRead();">Adicionar Cupom</button>
+					</div>
+				</div>
+			</ion-item>
 		</ion-list>
 	</ion-content>
 	<ion-footer-bar align-title="left">
 		<h1 class="title">Total: R$ {{vm.total}}</h1>
-		<div class="buttons" ng-click="vm.saveOrder(vm.items)">
-			<button class="button button-assertive">Finalizar Pedido</button>
+		<div class="buttons">
+			<button  ng-click="vm.orderSave(vm.items)" class="button button-assertive">Finalizar Pedido</button>
 		</div>
 	</ion-footer-bar>
 </ion-view>

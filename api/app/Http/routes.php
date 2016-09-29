@@ -30,8 +30,12 @@ Route::group(['middleware' => 'cors'], function(){
 		});
 
 		Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
-			Route::get('authenticated', ['as' => '.authenticated', 'uses' => 'Api\UsersController@authenticated']);
+			Route::get('authenticated', ['as' => 'authenticated', 'uses' => 'Api\UsersController@authenticated']);
 		});
+
+		Route::group(['prefix' => 'coupons', 'as' => 'coupons.'], function(){
+			Route::get('/code/{code}', ['as' => 'findByCode', 'uses' => 'Api\CouponsController@findByCode']);
+		});		
 	});
 });
 
