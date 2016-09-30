@@ -13,7 +13,6 @@
         'app.checkout',
         'app.coupon',
         'app.login',
-        'app.home',
         'app.order',
         'app.product',
         //'app.layout'
