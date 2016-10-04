@@ -13,8 +13,10 @@
         'app.checkout',
         'app.coupon',
         'app.login',
+        'app.menu',
         'app.order',
         'app.product',
+        'app.user'
         //'app.layout'
     ]);
 

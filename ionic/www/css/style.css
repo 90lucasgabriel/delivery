@@ -1,1 +1,52 @@
 /* Empty. Add your own CSS if you like */
+/*COMMON ----------------------------------------*/
+.bg-assertive{
+	background-color : #ef473a;
+}
+
+.text-white{
+	color            : white;
+}
+
+
+
+/*CENTER VERTICALLY ----------------------------*/
+.home .scroll-content {
+	display          : table !important;
+	width            : 100% !important;
+	height           : 100% !important;
+	margin-top       : -50px; /* the height of the centered content */
+	text-align       : center;
+}
+.home .scroll {
+	display          : table-cell;
+	vertical-align   : middle;
+}
+
+
+
+/*HEADER MENU ---------------------------------*/
+.item-avatar{
+	border           : none;
+	background       : none;
+}
+
+.item-background{
+	background       : url('../img/avatar-background.jpg');
+	padding          : 0;
+}
+
+.item-background-transparency{
+	background-color : rgba(0,0,0,0.5);
+	padding          : 10px;
+}
+
+.item-background-transparency h2,
+.item-background-transparency p{
+	color            : white !important;
+}
+
+h2{
+	font-weight      : bold !important;
+}
+

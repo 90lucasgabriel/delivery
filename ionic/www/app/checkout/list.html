@@ -1,6 +1,6 @@
 <ion-view view-title="Checkout">
 	<ion-nav-title>Pedido</ion-nav-title>
-	<div class="bar bar-subheader bar-stable">
+	<div class="bar bar-header bar-stable">
 		<button class="button button-clear button-ion ion-minus-circled" ng-click="vm.showDelete = !vm.showDelete" ng-class="{'button-assertive': vm.showDelete, '': !vm.showDelete}"></button>		
 		<h2 class="title">Checkout</h2>
 		<button class="button button-clear button-ion ion-plus" ng-click="vm.productList()"></button>
@@ -12,7 +12,7 @@
       </button>
     </ion-nav-buttons>
     -->
-	<ion-content class="has-header has-subheader has-footer">
+	<ion-content class="has-header has-footer">
 		<ion-list show-delete="vm.showDelete">			
 			<ion-item ng-repeat="item in vm.items" ng-click="vm.productDetails(item)">
 				<div class="row">

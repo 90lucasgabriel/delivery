@@ -6,7 +6,7 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl: 'http://192.168.1.103:8000',
+      baseUrl: 'http://localhost:8000',
       appTitle: 'Angular Modular Demo',
       version: '1.0.0'
   };
@@ -59,10 +59,16 @@
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
       }
-      if(window.StatusBar) {
-        StatusBar.styleDefault();
-      }
+      
+
+        if(window.StatusBar) {
+          StatusBar.overlaysWebView(false);
+          StatusBar.styleBlackTranslucent();
+          StatusBar.backgroundColorByHexString('#ce3c31');
+        }
+
     });
+
   }; 
 
   

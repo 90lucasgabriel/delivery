@@ -1,11 +1,11 @@
 <ion-view view-title="Pedido Concluído">
 	<ion-nav-title>Pedido Concluído</ion-nav-title>
-	<div class="bar bar-subheader bar-balanced">		
+	<div class="bar bar-header bar-balanced">		
 		<h2 class="title">Pedido Concluído</h2>
 	</div>
-	<ion-content class="has-header has-subheader has-subfooter">
+	<ion-content class="has-header has-footer">
 		<ion-list>
-			<ion-item ng-repeat="item in vm.items" ng-click="vm.productDetails(item)">
+			<ion-item ng-repeat="item in vm.items">
 				<div class="row">
 					<div class="col-50">
 						<h2>{{item.name}}</h2>
@@ -28,7 +28,7 @@
 	<ion-footer-bar align-title="left">
 		<h1 class="title">Total: R$ {{vm.total}}</h1>
 		<div class="buttons" ng-click="">
-			<button class="button button-assertive">Meus Pedidos</button>
+			<button class="button button-assertive" ui-sref="client.orders.list">Meus Pedidos</button>
 		</div>
 	</ion-footer-bar>
 </ion-view>

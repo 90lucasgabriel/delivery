@@ -29,7 +29,7 @@
 		function login(){
 			OAuth.getAccessToken(vm.user).then(
 				function(data){
-					$state.go('products.list');
+					$state.go('client.products.list');
 				}, 
 				function(response){
 					$ionicPopup.alert({

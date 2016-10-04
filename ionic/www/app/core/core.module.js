@@ -3,19 +3,13 @@
 
 	angular
 	.module('app.core', [
-	/*
-         * Angular modules
-         */
-        'ngResource',//'ngAnimate', 'ngRoute', 'ngSanitize',
+        	//Angular modules
+                'ngResource',//'ngAnimate', 'ngRoute', 'ngSanitize',
 
-        /*
-         * Our reusable cross app code modules
-         */
-        'blocks.router',
-        
-        /*
-         * 3rd Party modules
-         */
-        'angular-oauth2', 'ngCordova'
+                //Our reusable cross app code modules        
+                'blocks.router', 'app.filter',
+                
+                //3rd Party modules
+                'angular-oauth2', 'ngCordova'
 	]);
 })();

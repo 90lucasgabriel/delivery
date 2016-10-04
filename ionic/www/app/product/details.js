@@ -65,12 +65,12 @@
 
 		function addCart(product){
 			$cart.addItem(product);
-			$state.go('checkout.list');
+			$state.go('client.checkout.list');
 		}
 
 		function updateQuantity(product, quantity){
 			$cart.updateQuantity(product, quantity);
-			$state.go('checkout.list');
+			$state.go('client.checkout.list');
 		}
 	};
 })();

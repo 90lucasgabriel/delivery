@@ -7,12 +7,12 @@
 
 	CheckoutListController.$inject = [
 		'$state', '$ionicLoading', '$ionicPopup', '$cordovaBarcodeScanner',
-		'$cart', 'Order', 'Coupon'
+		'$cart', 'Order', 'Coupon', 'User'
 	];
 
 	function CheckoutListController(
 		$state, $ionicLoading, $ionicPopup, $cordovaBarcodeScanner,
-		$cart, Order, Coupon
+		$cart, Order, Coupon, User
 	){
 		var vm            = this;
 		var cart;
@@ -70,12 +70,12 @@
 		}
 
 		function productList(){
-			$state.go('products.list');
+			$state.go('client.products.list');
 		}
 
 		function productDetails(item) {
 			var index = vm.items.indexOf(item);
-			$state.go('products.details', {id: item.id})
+			$state.go('client.products.details', {id: item.id})
 		}
 
 		function orderSave(items){
@@ -97,7 +97,7 @@
 				.then(
 					function(data){
 						$ionicLoading.hide();
-						$state.go("checkout.accomplished");
+						$state.go("client.checkout.accomplished");
 					},
 					function(response){
 						$ionicLoading.hide();

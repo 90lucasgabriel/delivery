@@ -1,0 +1,46 @@
+<ion-side-menus enable-menu-with-back-views="true">
+	<ion-side-menu side="left">
+		<ion-content>
+			<ion-list>
+				<ion-item class="item-background">
+					<div class="item-background-transparency">
+						<div class="item item-avatar">				
+							<img src="../img/avatar.jpg">
+						</div>
+						<h2>{{vm.user.name}}</h2>
+						<p>{{vm.user.email}}</p>
+					</div>							
+				</ion-item>
+				<ion-item class="item-icon-left" menu-close ui-sref="client.products.list">
+					<i class="icon ion-bag"></i>
+					Produtos
+				</ion-item>
+				<ion-item class="item-icon-left" menu-close ui-sref="client.checkout.list">
+					<i class="icon ion-ios-cart"></i>
+					Carrinho
+				</ion-item>
+				<ion-item class="item-icon-left" menu-close ui-sref="client.orders.list">
+					<i class="icon ion-android-list"></i>
+					Meus Pedidos
+				</ion-item>
+				<ion-item class="item-icon-left" menu-close>
+					<i class="icon ion-log-out"></i>
+					Sair
+				</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-side-menu>
+	
+	<ion-side-menu-content>
+		<ion-nav-bar class="bar bar-assertive">
+			<ion-nav-buttons side="left">
+				<button  menu-toggle="left" class="button button-clear button-ion ion-navicon"></button>
+			</ion-nav-buttons>
+			<ion-nav-title class="padding-left">Delivery</ion-nav-title>
+		</ion-nav-bar>
+		<ion-content class="has-header">			
+  			<ion-nav-view animation="slide-left-right"></ion-nav-view> 
+		</ion-content>
+	</ion-side-menu-content>
+
+</ion-side-menus>

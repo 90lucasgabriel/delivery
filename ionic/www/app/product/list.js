@@ -50,15 +50,15 @@
 		function addCart(product){
 			product.quantity = 1;
 			$cart.addItem(product);
-			$state.go('checkout.list');
+			$state.go('client.checkout.list');
 		}
 
 		function details(product) {
-			$state.go('products.details', {id: product.id});
+			$state.go('client.products.details', {id: product.id});
 		}
 
 		function checkoutList(){
-			$state.go('checkout.list');
+			$state.go('client.checkout.list');
 		}
 	};
 })();

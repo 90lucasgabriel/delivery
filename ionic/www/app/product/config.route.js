@@ -13,7 +13,7 @@
     function getStates() {
         return [  
            {
-                state: 'products',
+                state: 'client.products',
                 config: {
                     abstract     : true,
                     url          : '/products',
@@ -21,7 +21,7 @@
                 }
             },   
             {
-                state: 'products.list',
+                state: 'client.products.list',
                 config: {
                     url          : '',
                     templateUrl  : 'app/product/list.html',
@@ -30,7 +30,7 @@
                 }
             },
             {
-                state: 'products.details',
+                state: 'client.products.details',
                 config: {
                     url          : '/{id}',
                     templateUrl  : 'app/product/details.html',

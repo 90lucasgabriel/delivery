@@ -1,0 +1,25 @@
+<ion-view>
+	<ion-nav-title>Meus Pedidos</ion-nav-title>
+	<ion-content class="has-footer">
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="vm.query()">
+		</ion-refresher>
+		<ion-list>
+		<ion-item ng-repeat="order in vm.orders">
+			<div class="row">
+				<div class="col-75" ui-sref="client.orders.details({id: order.id})">
+						<h2>{{order.created_at.date | limitTo:10 | date: 'dd/MM/yyyy'}}</h2>
+						<p>{{order.product_names | limitTo: 2 | join: ', '}}</p>
+						<i class="ion ion-ios-cart"></i> {{order.product_names.length}}
+					</div>
+						<div class="col text-right">R$ {{order.total}}</div>
+					</div>	
+			</ion-item>
+		</ion-list>		
+	</ion-content>
+	<ion-footer-bar align-title="left">
+		<h1 class="title">Carrinho: R$ {{vm.cart.total}}</h1>
+		<div class="buttons">
+			<button class="button button-assertive" ng-click="vm.checkoutList()">Ver Carrinho</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

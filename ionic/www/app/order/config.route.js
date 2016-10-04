@@ -2,7 +2,7 @@
     "use strict";
 
     angular
-        .module('app.checkout')
+        .module('app.order')
         .run(appRun);
 
     /* @ngInject */
@@ -13,29 +13,29 @@
     function getStates() {
         return [
             {
-                state: 'client.checkout',
+                state: 'client.orders',
                 config: {
                     abstract     : true,
-                    url          : '/checkout',
+                    url          : '/orders',
                     template     : '<ui-view />'
                 }
             },
             {
-                state: 'client.checkout.list',
+                state: 'client.orders.list',
                 config: {
                     url          : '',
-                    templateUrl  : 'app/checkout/list.html',
-                    controller   : 'CheckoutListController',
+                    templateUrl  : 'app/order/list.html',
+                    controller   : 'OrderListController',
                     controllerAs : 'vm',
                     cache        : false,
                 }
             },
             {
-                state: 'client.checkout.accomplished',
+                state: 'client.orders.details',
                 config: {
-                    url          : '/accomplished',
-                    templateUrl  : 'app/checkout/accomplished.html',
-                    controller   : 'CheckoutAccomplishedController',
+                    url          : '/:id',
+                    templateUrl  : 'app/order/details.html',
+                    controller   : 'OrderDetailsController',
                     controllerAs : 'vm',
                     cache        : false,
                 }

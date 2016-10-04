@@ -31,7 +31,9 @@
 			vm.items  = cart.items;
 			vm.total  = $cart.getTotal();
 
-			//$cart.clear();
+			setTimeout(function(){
+				$cart.clear();
+			}, 2000);
 		}
 
 		function productDetails(item) {
