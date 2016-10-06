@@ -11,9 +11,10 @@
          */
         'app.cart',
         'app.checkout',
+        'app.client',
         'app.coupon',
+        'app.deliveryman',
         'app.login',
-        'app.menu',
         'app.order',
         'app.product',
         'app.user'

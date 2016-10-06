@@ -12,12 +12,13 @@
 
     function getStates() {
         return [
+            //CLIENT ------------------------------------------
             {
                 state: 'client.orders',
                 config: {
                     abstract     : true,
                     url          : '/orders',
-                    template     : '<ui-view />'
+                    template     : '<ion-nav-view />'
                 }
             },
             {
@@ -36,6 +37,37 @@
                     url          : '/:id',
                     templateUrl  : 'app/order/details.html',
                     controller   : 'OrderDetailsController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
+            },
+
+
+            //DELIVERYMAN ---------------------------------------
+            {
+                state: 'deliveryman.orders',
+                config: {
+                    abstract     : true,
+                    url          : '/orders',
+                    template     : '<ion-nav-view />'
+                }
+            },
+            {
+                state: 'deliveryman.orders.list',
+                config: {
+                    url          : '',
+                    templateUrl  : 'app/order/list-deliveryman.html',
+                    controller   : 'DeliverymanOrderListController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
+            },
+            {
+                state: 'deliveryman.orders.details',
+                config: {
+                    url          : '/:id',
+                    templateUrl  : 'app/order/details-deliveryman.html',
+                    controller   : 'DeliverymanOrderDetailsController',
                     controllerAs : 'vm',
                     cache        : false,
                 }

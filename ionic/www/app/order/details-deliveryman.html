@@ -1,0 +1,25 @@
+<ion-view view-title="Pedido">
+	<ion-nav-title>Pedido #{{vm.order.id}}</ion-nav-title>
+	<div class="bar bar-header bar-stable">
+		<div class="row">
+			<div class="col">Pedido #{{vm.order.id}}</div>
+			<div class="col text-center">{{vm.order.created_at.date | limitTo: 10 | date: 'dd/MM/yyyy'}}</div>
+			<div class="col text-right">R$ {{vm.order.total}}</div>
+		</div>
+	</div>
+	<ion-content class="has-header">		
+		<ion-list>
+			<ion-item ng-repeat="item in vm.order.items.data">
+				<div class="row">
+					<div class="col-75" ng-click="vm.details(item)">
+						<h2>{{item.product.data.name}}</h2>
+					</div>
+					<div class="col">{{item.quantity}}</div>
+					
+					<div class="col text-right">R$ {{item.price}}</div>
+					</div>
+				</div>	
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
 /*COMMON ----------------------------------------*/
+ion-side-menu-content ion-content{
+	background-color : #EFEFEF;
+}
+
 .bg-assertive{
 	background-color : #ef473a;
 }
@@ -34,6 +38,7 @@
 .item-background{
 	background       : url('../img/avatar-background.jpg');
 	padding          : 0;
+	top              : -2px;
 }
 
 .item-background-transparency{

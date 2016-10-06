@@ -11,15 +11,7 @@
 						<p>{{vm.user.email}}</p>
 					</div>							
 				</ion-item>
-				<ion-item class="item-icon-left" menu-close ui-sref="client.products.list">
-					<i class="icon ion-bag"></i>
-					Produtos
-				</ion-item>
-				<ion-item class="item-icon-left" menu-close ui-sref="client.checkout.list">
-					<i class="icon ion-ios-cart"></i>
-					Carrinho
-				</ion-item>
-				<ion-item class="item-icon-left" menu-close ui-sref="client.orders.list">
+				<ion-item class="item-icon-left" menu-close ui-sref="deliveryman.orders.list">
 					<i class="icon ion-android-list"></i>
 					Meus Pedidos
 				</ion-item>
@@ -32,14 +24,15 @@
 	</ion-side-menu>
 	
 	<ion-side-menu-content>
-		<ion-nav-bar class="bar bar-assertive">
+		<ion-nav-bar class="bar bar-dark">
+		<ion-nav-back-button></ion-nav-back-button>
 			<ion-nav-buttons side="left">
 				<button  menu-toggle="left" class="button button-clear button-ion ion-navicon"></button>
 			</ion-nav-buttons>
-			<ion-nav-title class="padding-left">Delivery</ion-nav-title>
+			<ion-nav-title>Delivery</ion-nav-title>
 		</ion-nav-bar>
-		<ion-content class="has-header">			
-  			<ion-nav-view animation="slide-left-right"></ion-nav-view> 
+		<ion-content>			
+  			<ion-nav-view></ion-nav-view> 
 		</ion-content>
 	</ion-side-menu-content>
 

@@ -1,29 +1,42 @@
 (function () {
-	"use strict";
+  "use strict";
 
-	angular
-		.module('app.user')
-		.factory('User', User);
+  angular
+    .module('app.user')
+    .factory('UserService', UserService);
 
-	User.$inject = [
-		'$resource', 
-		'appConfig'
-	];
+  UserService.$inject = ['$localStorage'];
 
-	function User(
-		$resource,
-		appConfig
-	){
-		
-		return $resource(appConfig.baseUrl + '/api/users/:id', {id: '@id'},{
-			query:{
-				isArray: false
-			},
-			authenticated: {
-				method : 'GET',
-				url    : appConfig.baseUrl + '/api/users/authenticated'
-			}
-		});
+  function UserService($localStorage){    
+    var key     = 'user';
+    var service = {
+      get       : get,
+      set       : set,
+      getObject : getObject,
+      setObject : setObject
+    };
 
-	};
+    return service;
+
+
+
+    //-------------------------------
+    function get(defaultValue){
+      return $localStorage.get(key, defaultValue);
+    }
+
+    function set(value){
+      return $localStorage.set(key, value);
+    }
+
+    function getObject(){
+      return $localStorage.getObject(key);
+    }
+
+    function setObject(value){
+      return $localStorage.setObject(key, value);
+    }
+
+
+  };
 })();

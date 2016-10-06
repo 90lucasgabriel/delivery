@@ -17,7 +17,7 @@
                 config: {
                     abstract     : true,
                     url          : '/products',
-                    template     : '<ui-view />'
+                    template     : '<ion-nav-view />'
                 }
             },   
             {
@@ -26,7 +26,8 @@
                     url          : '',
                     templateUrl  : 'app/product/list.html',
                     controller   : 'ProductListController',
-                    controllerAs : 'vm'
+                    controllerAs : 'vm',
+                    cache        : false,
                 }
             },
             {
@@ -35,7 +36,8 @@
                     url          : '/{id}',
                     templateUrl  : 'app/product/details.html',
                     controller   : 'ProductDetailsController',
-                    controllerAs : 'vm'
+                    controllerAs : 'vm',
+                    cache        : false,
                 }
             },
             

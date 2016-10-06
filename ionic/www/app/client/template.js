@@ -2,17 +2,17 @@
 	"use strict";
 
 	angular
-		.module('app.menu')
+		.module('app.client')
 		.controller('ClientMenuController', ClientMenuController);
 
 	ClientMenuController.$inject = [
 		'$ionicLoading',
-		'User'
+		'UserService'
 	];
 
 	function ClientMenuController(
 		$ionicLoading,
-		User
+		UserService
 	){
 		var vm          = this;
 		vm.user;
@@ -28,23 +28,12 @@
 			$ionicLoading.show({
 				template: 'Carregando'
 			});		
-			authenticated();
+			vm.user = userGet();
+			$ionicLoading.hide();
 		}
 
-		function authenticated(){
-			User.authenticated()
-				.$promise
-				.then(
-					function(data){
-						vm.user = data.data;
-						$ionicLoading.hide();
-					},
-					function(response){
-						console.log(reponse);
-						$ionicLoading.hide();
-					}
-				);
-
+		function userGet(){
+			return UserService.getObject();
 		}
 	};
 })();

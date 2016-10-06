@@ -7,14 +7,16 @@
 
 	LoginController.$inject = [
 		'$state',
-		'$ionicPopup', 'OAuth'
+		'$ionicPopup', 'OAuth', 'OAuthToken',
+		'UserService', 'User'
 	];
 
 	function LoginController(
 		$state,
-		$ionicPopup, OAuth
+		$ionicPopup, OAuth, OAuthToken,
+		UserService, User
 	){
-		var vm = this;
+		var vm   = this;
 		vm.login = login;
 
 
@@ -27,17 +29,26 @@
 
 		//------------------------------
 		function login(){
-			OAuth.getAccessToken(vm.user).then(
-				function(data){
-					$state.go('client.products.list');
-				}, 
-				function(response){
-					$ionicPopup.alert({
-						title: 'Autenticação',
-						template: 'Login e/ou Senha inválidos.'
-					});
-				}
-			);
+			var token    = OAuth.getAccessToken(vm.user);
+			
+			token				
+				.then(function(tokenData){
+					return User.authenticated({include: 'client'}).$promise;
+				})
+				.then(
+					function(userData){
+						UserService.setObject(userData.data);		
+						$state.go('client.products.list');
+					},
+					function(response){
+						UserService.setObject(null);	
+						OAuthToken.removeToken();
+						$ionicPopup.alert({
+							title: 'Autenticação',
+							template: 'Login e/ou Senha inválidos.'
+						});
+					}
+				);			
 		}
 	};
 })();

@@ -15,10 +15,11 @@
             {
                 state: 'login',
                 config: {
-                    url:          '/login',
-                    templateUrl:  'app/login/login.html',
-                    controller:   'LoginController',
-                    controllerAs: 'vm'
+                    url          : '/login',
+                    templateUrl  : 'app/login/login.html',
+                    controller   : 'LoginController',
+                    controllerAs : 'vm',
+                    cache        : false,
                 }
             }
         ];

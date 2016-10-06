@@ -17,7 +17,7 @@
                 config: {
                     abstract     : true,
                     url          : '/checkout',
-                    template     : '<ui-view />'
+                    template     : '<ion-nav-view />'
                 }
             },
             {
