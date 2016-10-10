@@ -6,7 +6,7 @@
 		<ion-list>
 		<ion-item ng-repeat="order in vm.orders">
 			<div class="row">
-				<div class="col-75" ui-sref="client.orders.details({id: order.id})">
+				<div class="col-75" on-tap="vm.goDetails(order)" on-hold="vm.showOptions(order)">
 						<h2>{{order.created_at.date | limitTo:10 | date: 'dd/MM/yyyy'}}</h2>
 						<p>{{order.product_names | limitTo: 2 | join: ', '}}</p>
 						<i class="ion ion-ios-cart"></i> {{order.product_names.length}}
