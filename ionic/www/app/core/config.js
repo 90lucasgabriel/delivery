@@ -6,7 +6,7 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl: 'http://192.168.1.102:8000',
+      baseUrl: 'http://192.168.1.104:8000',
       appTitle: 'Angular Modular Demo',
       version: '1.0.0'
   };
@@ -19,7 +19,7 @@
   
   configure.$inject = [
     '$provide',
-    'OAuthProvider', 'OAuthTokenProvider', 
+    '$mdThemingProvider', 'OAuthProvider', 'OAuthTokenProvider', 
     'appConfig'
   ];
   
@@ -32,8 +32,8 @@
   //------------------------------------------------
 
   function configure(
-    $provide,
-    OAuthProvider, OAuthTokenProvider, 
+    $provide, 
+    $mdThemingProvider, OAuthProvider, OAuthTokenProvider, 
     appConfig
   ){
     OAuthProvider.configure({
@@ -50,7 +50,12 @@
       }
     });
 
-    $provide.decorator('OAuthToken', oauthTokenLocal);    
+    $provide.decorator('OAuthToken', oauthTokenLocal);
+
+    $mdThemingProvider.theme('default')
+    .primaryPalette('red')
+    .accentPalette('yellow')
+    .warnPalette('pink'); 
   } 
 
   function run($ionicPlatform) {
@@ -60,11 +65,17 @@
         cordova.plugins.Keyboard.disableScroll(true);
       }
       
+      
 
-        if(window.StatusBar) {
-          StatusBar.overlaysWebView(false);
-          StatusBar.styleBlackTranslucent();
-          StatusBar.backgroundColorByHexString('#ce3c31');
+
+        if(ionic.Platform.isWebView()) {
+            if (ionic.Platform.isAndroid()) {
+              StatusBar.backgroundColorByHexString("#ef473a");
+            }
+            else{
+              StatusBar.overlaysWebView(true);  
+            }
+          //StatusBar.styleBlackTranslucent();
         }
 
     });

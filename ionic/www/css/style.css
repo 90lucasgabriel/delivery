@@ -38,7 +38,10 @@ ion-side-menu-content ion-content{
 .item-background{
 	background       : url('../img/avatar-background.jpg');
 	padding          : 0;
-	top              : -2px;
+}
+
+.item-background.item{
+	border-top       : none;
 }
 
 .item-background-transparency{
@@ -55,3 +58,28 @@ h2{
 	font-weight      : bold !important;
 }
 
+
+
+/*ANGULAR MATERIAL ----------------------------------- */
+md-input-container.white:not(.md-input-invalid).md-input-focused .md-input {
+    border-color     : white;
+}
+
+md-input-container.white .md-input, md-input-container.white label{
+	color            : white !important;
+	border-color     : white;
+}
+
+.md-button.white{
+	color            : white;
+	background-color : rgba(0,0,0,0.1) !important;
+}
+
+.full-width{
+	width            : 100%;
+	margin           : 0 !important;
+}
+
+.loading-container .loading{
+	background-color : rgba(0, 0, 0, 0) !important;
+}

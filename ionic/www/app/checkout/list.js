@@ -80,7 +80,7 @@
 
 		function orderSave(items){
 			$ionicLoading.show({
-				template: 'Carregando'
+				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
 
 			var i = {items: angular.copy(items)};
@@ -113,7 +113,7 @@
 		//Private functions ----------------------
 		function getCoupon(code){
 			$ionicLoading.show({
-				template: 'Carregando'
+				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
 
 			Coupon.getByCode({code: code})

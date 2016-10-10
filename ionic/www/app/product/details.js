@@ -28,7 +28,7 @@
 		//------------------------------
 		function activate(){
 			$ionicLoading.show({
-				template: 'Carregando'
+				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
 
 			vm.cart = $cart.get();

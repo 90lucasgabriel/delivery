@@ -14,10 +14,18 @@
 		$resource,
 		appConfig
 	){
-		
-		return $resource(appConfig.baseUrl + '/api/deliverymen/orders/:id', {id: '@id'},{
+		var url = appConfig.baseUrl + '/api/deliverymen/orders/:id';
+		return $resource(url, {id: '@id'},{
 			query:{
 				isArray: false
+			},
+			updateStatus:{
+				method: 'PATCH',
+				url: url + '/update-status'
+			},
+			geo: {
+				method: 'POST',
+				url: url + '/geo'
 			}
 		});
 

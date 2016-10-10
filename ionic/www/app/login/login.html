@@ -3,17 +3,17 @@
 		<h1 class="text-center text-white">DELIVERY</h1>
 		<form name="form" ng-submit="vm.login()">
 			<div class="padding">
-				<label class="item item-input input-calm">
-	                <span class="input-label">Usuário</span>
-	                <input type="text" ng-model="vm.user.username" required />
-	            </label>
-	            <label class="item item-input input-calm">
-	                <span class="input-label">Senha</span>
-	                <input type="password" ng-model="vm.user.password" required />
-	            </label>
+				<md-input-container class="md-block white" flex-gt-sm>
+					<label>Usuário</label>
+					<input ng-model="vm.user.username"  type="email" required md-no-asterisk="true">
+				</md-input-container>
+				<md-input-container class="md-block white" flex-gt-sm>
+					<label>Senha</label>
+					<input ng-model="vm.user.password"  type="password"  required md-no-asterisk="true">
+				</md-input-container>				
 			</div>
 			<div class="padding">
-				<button type="submit" class="button button-full button-stable">Login</button>
+				<md-button type="submit" class="white full-width">Entrar</md-button>
 			</div>
 		</form>
 	</ion-content>

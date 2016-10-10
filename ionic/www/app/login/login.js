@@ -7,13 +7,13 @@
 
 	LoginController.$inject = [
 		'$state',
-		'$ionicPopup', 'OAuth', 'OAuthToken',
+		'$ionicPopup', '$ionicLoading', 'OAuth', 'OAuthToken',
 		'UserService', 'User'
 	];
 
 	function LoginController(
 		$state,
-		$ionicPopup, OAuth, OAuthToken,
+		$ionicPopup, $ionicLoading, OAuth, OAuthToken,
 		UserService, User
 	){
 		var vm   = this;
@@ -26,9 +26,13 @@
 			password: ''
 		};
 
-
+  
 		//------------------------------
 		function login(){
+			$ionicLoading.show({
+				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
+			});
+
 			var token    = OAuth.getAccessToken(vm.user);
 			
 			token				
@@ -37,8 +41,14 @@
 				})
 				.then(
 					function(userData){
-						UserService.setObject(userData.data);		
-						$state.go('client.products.list');
+						UserService.setObject(userData.data);
+						if(userData.data.role=='deliveryman'){
+							$state.go('deliveryman.orders.list');
+						}
+						else{
+							$state.go('client.products.list');	
+						}
+						$ionicLoading.hide();
 					},
 					function(response){
 						UserService.setObject(null);	
@@ -47,6 +57,7 @@
 							title: 'Autenticação',
 							template: 'Login e/ou Senha inválidos.'
 						});
+						$ionicLoading.hide();
 					}
 				);			
 		}
