@@ -6,7 +6,7 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl   : 'http://localhost:8000',
+      baseUrl   : 'http://192.168.1.102:8000',
       appTitle  : 'Angular Modular Demo',
       version   : '1.0.0',
       pusherKey : 'e9f4f98efe9fc0b14090',
@@ -89,6 +89,18 @@
       }
 
 
+    });
+
+
+
+    var push = new Ionic.Push({
+      debug: true,
+      onNotification: function(data){
+        console.log(data);
+      }
+    });
+    push.register(function(token){
+      console.log(token);
     });
 
   }; 
