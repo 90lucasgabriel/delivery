@@ -2,8 +2,8 @@
 namespace CodeDelivery\Http\Controllers\Api;
 
 use CodeDelivery\Http\Controllers\Controller;
-use CodeDelivery\Events\GetLocationDeliveryman;
 use CodeDelivery\Models\Geo;
+use CodeDelivery\Events\GetLocationDeliveryman;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Services\OrderService;

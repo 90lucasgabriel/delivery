@@ -58,20 +58,21 @@
 		}
 
 		function showOptions(order){
-			var items = [{name:'Delete'}, {name:'teste'}, {name: 'hahaha'}];
-			$mdBottomSheet.show({
-		      template: '<md-bottom-sheet class="md-grid" layout="column">  <div layout="row" layout-align="center center" ng-cloak>    <h4>Since <code>clickOutsideToClose = false</code>, drag down or press ESC to close</h4>  </div>  <div ng-cloak>    <md-list flex layout="row" layout-align="center center">      <md-list-item ng-repeat="item in items">        <div>          <md-button class="md-grid-item-content" ng-click="listItemClick($index)">            <md-icon md-svg-src="{{item.icon}}"></md-icon>            <div class="md-grid-text"> {{ item.name }} </div>          </md-button>        </div>      </md-list-item>    </md-list>  </div></md-bottom-sheet>		      ',
+			/*$mdBottomSheet.show({
+		      templateUrl: '/app/common/templates/order-bottom-sheet.html',
+		      controller: 'OrderBottomSheetController',
+		      controllerAs: 'vm'
 		      
 		    }).then(function(clickedItem) {
 		      $scope.alert = clickedItem['name'] + ' clicked!';
 		    });
-		/*			
+			*/	
 			var hideSheet = $ionicActionSheet.show({
 			  buttons: [
 			    { text: 'Detalhes' },
-			    { text: 'Ver entrega' }
+			    { text: 'Rastreamento' }
 			  ],
-			  destructiveText: 'Delete',
+			  //destructiveText: 'Excluir',
 			  titleText: 'Opções',
 			  cancelText: 'Cancelar',
 			  cancel: function() {
@@ -83,12 +84,11 @@
 			  			$state.go('client.orders.details', {id: order.id});
 			  			break;
 			  		case 1:
-			  			
+			  			$state.go('client.orders.delivery', {id: order.id});
 			  			break;
 			  	}
 			  }
 			});
-			*/
 		}
 	};
 })();

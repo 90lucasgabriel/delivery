@@ -6,16 +6,20 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl: 'http://192.168.1.104:8000',
-      appTitle: 'Angular Modular Demo',
-      version: '1.0.0'
+      baseUrl   : 'http://localhost:8000',
+      appTitle  : 'Angular Modular Demo',
+      version   : '1.0.0',
+      pusherKey : 'e9f4f98efe9fc0b14090',
   };
 
   core.constant('appConfig', appConfig);
 
 
   //Inject ------------------------------------------
-  run.$inject = ['$ionicPlatform'];
+  run.$inject = [
+    '$ionicPlatform',
+    'appConfig'
+  ];
   
   configure.$inject = [
     '$provide',
@@ -58,25 +62,32 @@
     .warnPalette('pink'); 
   } 
 
-  function run($ionicPlatform) {
+  function run(
+    $ionicPlatform, 
+    appConfig
+  ){
+    window.client = new Pusher(appConfig.pusherKey);
+
+
     $ionicPlatform.ready(function() {
       if(window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
       }
-      
-      
 
 
-        if(ionic.Platform.isWebView()) {
-            if (ionic.Platform.isAndroid()) {
-              StatusBar.backgroundColorByHexString("#ef473a");
-            }
-            else{
-              StatusBar.overlaysWebView(true);  
-            }
-          //StatusBar.styleBlackTranslucent();
+      if(ionic.Platform.isWebView()) {
+        ionic.Platform.fullScreen();
+        StatusBar.styleBlackTranslucent();
+        if (ionic.Platform.isAndroid()) {
+          StatusBar.backgroundColorByHexString("#ef473a");
         }
+        else{
+          StatusBar.overlaysWebView(true);  
+        }
+        //StatusBar.styleBlackTranslucent();
+      }
+
 
     });
 

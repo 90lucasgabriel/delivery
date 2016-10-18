@@ -7,9 +7,9 @@
                 'ngResource',//'ngAnimate', 'ngRoute', 'ngSanitize',
 
                 //Our reusable cross app code modules        
-                'blocks.router', 'app.filter', 'ngMaterial',
+                'blocks.router', 'app.filter',
                 
                 //3rd Party modules
-                'angular-oauth2', 'ngCordova'
+                'angular-oauth2', 'ngCordova', 'ngMaterial', 'pusher-angular'
 	]);
 })();

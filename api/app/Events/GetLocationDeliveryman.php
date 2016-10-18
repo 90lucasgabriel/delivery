@@ -2,7 +2,6 @@
 
 namespace CodeDelivery\Events;
 
-use CodeDelivery\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use CodeDelivery\Models\Geo;
@@ -32,7 +31,7 @@ class GetLocationDeliveryman extends Event implements ShouldBroadcast
      * @return array
      */
     public function broadcastOn()
-    {
+    {  
         return [$this->model->hash];
     }
 }

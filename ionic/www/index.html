@@ -21,6 +21,9 @@
   <ion-nav-view></ion-nav-view> 
 
   <!--Scripts-->
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <script src="lib/jquery.easing/js/jquery.easing.min.js"></script>
+
   <script src="cordova.js"></script>
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <!--<script src="lib/ionic-material-design-lite/dist/js/ionic.material-design-lite.bundle.min.js"></script>-->
@@ -29,11 +32,28 @@
   <script src="lib/query-string/query-string.js"></script>
   <script src="lib/angular-oauth2/dist/angular-oauth2.min.js"></script>  
   <script src="lib/angular-resource/angular-resource.min.js"></script>
+  <script src="lib/pusher-websocket-iso/dist/web/pusher.js"></script>
+  <script src="lib/pusher-angular/lib/pusher-angular.min.js"></script>
+
   
   
   <!-- Angular Material -->
   <script src="lib/angular-aria/angular-aria.min.js"></script>
   <script src="lib/angular-material/angular-material.min.js"></script>
+
+  <!-- Angular Google Maps -->
+  <script src='lib/lodash/dist/lodash.min.js'></script>
+  <script src='lib/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+  <script src='lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
+  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+  
+  <!-- Animate Marker Google Maps -->
+  <script src="lib/marker-animate-unobtrusive/vendor/markerAnimate.js"></script>
+  <script src="lib/marker-animate-unobtrusive/dist/SlidingMarker.min.js"></script>
+  <script>
+    SlidingMarker.initializeGlobally();
+  </script>
+
 
   <!-- Bootstrapping -->
   <script src="app/app.module.js"></script>
@@ -85,7 +105,9 @@
   <script src="app/order/order.module.js"></script>
   <script src="app/order/config.route.js"></script>
   <script src="app/order/order.resource.js"></script>
+  <script src="app/order/order-map.service.js"></script>
   <script src="app/order/order-deliveryman.resource.js"></script>
+  <script src="app/order/delivery.js"></script>
   <script src="app/order/details.js"></script>
   <script src="app/order/details-deliveryman.js"></script>
   <script src="app/order/list.js"></script>
@@ -108,6 +130,13 @@
   <!-- filter module -->
   <script src="app/common/filters/filter.module.js"></script>
   <script src="app/common/filters/join.js"></script>
+
+  <!-- service module -->
+
+  <!-- templates -->
+  <script src="app/common/templates/order-bottom-sheet.js"></script>
+  <script src="app/common/templates/order-map-button-center.js"></script>
+
 
 
 </body>

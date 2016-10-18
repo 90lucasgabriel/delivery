@@ -64,7 +64,7 @@
 
 			$ionicPopup.alert({
 				title: 'Localização',
-				template: 'Para localização?'
+				template: 'Parar localização?'
 			}).then(function(){
 				watchStop();
 			});
@@ -74,7 +74,7 @@
 				paramsUpdate,
 				function(data){
 					var watchOptions = {
-						timeout: 3000,
+						timeout: 30000,
 						enableHighAccuracy: false
 					};
 					watch = $cordovaGeolocation.watchPosition(watchOptions);
@@ -85,6 +85,7 @@
 								title: 'Localização',
 								template: response
 							});
+							console.log('response', response);
 						},
 						function(position){
 							var params = {
@@ -98,6 +99,7 @@
 							OrderDeliveryman.geo(params, paramsUpdate);	
 						}
 					);
+					
 					$ionicLoading.hide();
 				},
 				function(){

@@ -12,6 +12,15 @@ ion-side-menu-content ion-content{
 	color            : white;
 }
 
+body:not(.platform-android)  div.scroll ion-nav-view.view-container{
+	height: calc(100vh - 44px) ;
+}
+
+.back-text{
+	display          : none !important;
+}
+
+
 
 
 /*CENTER VERTICALLY ----------------------------*/
@@ -57,6 +66,21 @@ ion-side-menu-content ion-content{
 h2{
 	font-weight      : bold !important;
 }
+
+
+
+/*ACTION SHEET BOTTOM ---------------------------------*/
+body.platform-android .button.action-sheet-option, body.platform-android .button.action-sheet-destructive{
+	padding-left: 20px;
+}
+
+
+
+/*ANGULAR GOOGLE MAP ---------------------------------*/
+.angular-google-map-container{
+	height: 400px;
+}
+
 
 
 

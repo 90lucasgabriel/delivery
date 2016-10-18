@@ -1,0 +1,43 @@
+<ion-view view-title="Rastreamento">
+	<ion-nav-title>Rastreamento #{{vm.order.id}}</ion-nav-title>
+	<div class="bar bar-header bar-stable">
+		<div class="row">
+			<div class="col">Pedido #{{vm.order.id}}</div>
+			<div class="col text-center">{{vm.order.created_at.date | limitTo: 10 | date: 'dd/MM/yyyy'}}</div>
+			<div class="col text-right">R$ {{vm.order.total}}</div>
+		</div>
+	</div>
+	<ion-content class="has-header">		
+		<ion-list>
+			<ion-item ng-repeat="item in vm.order.items.data">
+				<div class="row">
+					<div class="col-75" ng-click="vm.details(item)">
+						<h2>{{item.product.data.name}}</h2>
+					</div>
+					<div class="col">{{item.quantity}}</div>
+					
+					<div class="col text-right">R$ {{item.price}}</div>
+					
+				</div>	
+			</ion-item>
+		</ion-list>
+		<ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom' bounds="vm.map.bounds">
+			<ui-gmap-map-control 
+				template="teste.html" position="top-right" controller="OrderMapButtonCenterController" index="-1"></ui-gmap-map-control>
+			<ui-gmap-markers
+				models="vm.markers"
+				coords="'coords'" 
+				options="'options'"
+				fit="vm.map.fit">
+			</ui-gmap-markers>
+
+			<script type="text/ng-template" id="teste.html">
+				<button class="button button-stable" ng-click="fit()">
+					<i class="icon" ng-class="{'ion-android-bicycle': !map.fit, 'ion-stop': map.fit}"></i>
+				</button>
+			</script>
+		</ui-gmap-google-map>
+	</ion-content>
+</ion-view>
+
+

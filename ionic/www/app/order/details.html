@@ -7,7 +7,7 @@
 			<div class="col text-right">R$ {{vm.order.total}}</div>
 		</div>
 	</div>
-	<ion-content class="has-header has-footer">		
+	<ion-content class="has-header">		
 		<ion-list>
 			<ion-item ng-repeat="item in vm.order.items.data">
 				<div class="row">
@@ -17,7 +17,7 @@
 					<div class="col">{{item.quantity}}</div>
 					
 					<div class="col text-right">R$ {{item.price}}</div>
-					</div>
+					
 				</div>	
 			</ion-item>
 		</ion-list>

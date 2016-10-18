@@ -18,7 +18,8 @@
                 config: {
                     abstract     : true,
                     url          : '/orders',
-                    template     : '<ion-nav-view />'
+                    template     : '<ion-nav-view />',
+                    cache        : false
                 }
             },
             {
@@ -37,6 +38,16 @@
                     url          : '/:id',
                     templateUrl  : 'app/order/details.html',
                     controller   : 'OrderDetailsController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
+            },
+            {
+                state: 'client.orders.delivery',
+                config: {
+                    url          : '/:id/delivery',
+                    templateUrl  : 'app/order/delivery.html',
+                    controller   : 'OrderDeliveryController',
                     controllerAs : 'vm',
                     cache        : false,
                 }
