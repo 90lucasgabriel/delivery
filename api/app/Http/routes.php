@@ -32,6 +32,7 @@ Route::group(['middleware' => 'cors'], function(){
 
 		Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
 			Route::get('authenticated', ['as' => 'authenticated', 'uses' => 'Api\UsersController@authenticated']);
+			Route::patch('device-token', ['as' => 'device-token', 'uses' => 'Api\UsersController@updateDeviceToken']);
 		});
 
 		Route::group(['prefix' => 'coupons', 'as' => 'coupons.'], function(){

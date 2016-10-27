@@ -22,6 +22,10 @@
 			authenticated: {
 				method : 'GET',
 				url    : appConfig.baseUrl + '/api/users/authenticated'
+			},
+			updateDeviceToken: {
+				method : 'PATCH',
+				url    : appConfig.baseUrl + '/api/users/device-token'
 			}
 		});
 

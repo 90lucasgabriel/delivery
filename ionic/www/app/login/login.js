@@ -8,13 +8,13 @@
 	LoginController.$inject = [
 		'$state',
 		'$ionicPopup', '$ionicLoading', 'OAuth', 'OAuthToken',
-		'UserService', 'User'
+		'$localStorage', 'UserService', 'User'
 	];
 
 	function LoginController(
 		$state,
 		$ionicPopup, $ionicLoading, OAuth, OAuthToken,
-		UserService, User
+		$localStorage, UserService, User
 	){
 		var vm   = this;
 		vm.login = login;
@@ -35,7 +35,14 @@
 
 			var token    = OAuth.getAccessToken(vm.user);
 			
-			token				
+			token	
+				.then(function(data){
+					var deviceToken = $localStorage.get('device_token');
+					return User.updateDeviceToken(
+						{}, 
+						{device_token: deviceToken}
+					).$promise;
+				})			
 				.then(function(tokenData){
 					return User.authenticated({include: 'client'}).$promise;
 				})

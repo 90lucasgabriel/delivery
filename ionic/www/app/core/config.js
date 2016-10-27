@@ -6,7 +6,7 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl   : 'http://192.168.1.102:8000',
+      baseUrl   : 'http://192.168.1.105:8000',
       appTitle  : 'Angular Modular Demo',
       version   : '1.0.0',
       pusherKey : 'e9f4f98efe9fc0b14090',
@@ -17,12 +17,12 @@
 
   //Inject ------------------------------------------
   run.$inject = [
-    '$ionicPlatform',
-    'appConfig'
+    '$ionicPlatform', '$ionicPush', 
+    'appConfig', '$localStorage'
   ];
   
   configure.$inject = [
-    '$provide',
+    '$provide', '$ionicCloudProvider',
     '$mdThemingProvider', 'OAuthProvider', 'OAuthTokenProvider', 
     'appConfig'
   ];
@@ -36,7 +36,7 @@
   //------------------------------------------------
 
   function configure(
-    $provide, 
+    $provide, $ionicCloudProvider,
     $mdThemingProvider, OAuthProvider, OAuthTokenProvider, 
     appConfig
   ){
@@ -60,11 +60,29 @@
     .primaryPalette('red')
     .accentPalette('yellow')
     .warnPalette('pink'); 
+
+    $ionicCloudProvider.init({
+      "core": {
+        "app_id": "4deaab1f"
+      },
+      "push": {
+        "sender_id": "658876233986",
+        "pluginConfig": {
+          "ios": {
+            "badge": true,
+            "sound": true
+          },
+          "android": {
+            "iconColor": "#343434"
+          }
+        }
+      }
+    });
   } 
 
   function run(
-    $ionicPlatform, 
-    appConfig
+    $ionicPlatform, $ionicPush,
+    appConfig, $localStorage
   ){
     window.client = new Pusher(appConfig.pusherKey);
 
@@ -77,8 +95,9 @@
 
 
       if(ionic.Platform.isWebView()) {
-        ionic.Platform.fullScreen();
+        //ionic.Platform.fullScreen();
         StatusBar.styleBlackTranslucent();
+        StatusBar.overlaysWebView(true); 
         if (ionic.Platform.isAndroid()) {
           StatusBar.backgroundColorByHexString("#ef473a");
         }
@@ -91,17 +110,28 @@
 
     });
 
+    $ionicPush.register()
+    .then(function(data) {
+      console.log('Token saved:', data.token);
+      return $ionicPush.saveToken(data);
+    }).then(function(data) {
+      console.log('Token saved:', data.token);
+      $localStorage.set('device_token', data.token);
+    });
 
 
+
+/*
     var push = new Ionic.Push({
       debug: true,
       onNotification: function(data){
         console.log(data);
       }
     });
-    push.register(function(token){
-      console.log(token);
+    push.register(function(data){
+      $localStorage.set('device_token', data.token);
     });
+    */
 
   }; 
 

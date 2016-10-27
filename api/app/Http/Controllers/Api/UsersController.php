@@ -20,4 +20,11 @@ class UsersController extends Controller{
 
         return $user;
     }
+
+    public function updateDeviceToken(Request $request){
+        $id = Authorizer::getResourceOwnerId();
+        $deviceToken = $request->get('device_token');
+        
+        return $this->userRepository->updateDeviceToken($id, $deviceToken);
+    }
 }

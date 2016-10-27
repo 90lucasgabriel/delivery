@@ -3,6 +3,7 @@
 
     angular.module('app', [
         'ionic',
+        'ionic.cloud',
         'app.core',
         //'app.widgets',
 

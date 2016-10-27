@@ -6,13 +6,13 @@
 		.controller('ProductListController', ProductListController);
 
 	ProductListController.$inject = [
-		'$resource', 
+		'$scope', '$resource', 
 		'$state', '$ionicLoading',
 		'$localStorage', '$cart', 'Product'
 	];
 
 	function ProductListController(
-		$resource,
+		$scope, $resource,
 		$state, $ionicLoading,
 		$localStorage, $cart, Product
 	){
@@ -33,6 +33,10 @@
 				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
 			vm.products = query();
+			$scope.$on('cloud:push:notification', function(event, data) {
+		      var msg = data.message;
+		      alert(msg.title + ': ' + msg.text);
+		    });
 		}
 
 		function query(){

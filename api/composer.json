@@ -13,7 +13,8 @@
         "lucadegasperi/oauth2-server-laravel": "5.1.*",
         "league/fractal": "^0.13.0",
         "barryvdh/laravel-cors": "^0.8.2",
-        "pusher/pusher-php-server": "~2.2"
+        "pusher/pusher-php-server": "~2.2",
+        "dmitrovskiy/ionic-push-php": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
