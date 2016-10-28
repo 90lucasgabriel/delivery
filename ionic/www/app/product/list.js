@@ -17,8 +17,11 @@
 		$localStorage, $cart, Product
 	){
 		var vm          = this;
+		var page        = 1;
+		vm.loadMore     = true;
 		vm.products     = [];
 		vm.activate     = activate;
+		vm.queryAll     = queryAll;
 		vm.query        = query;
 		vm.addCart      = addCart;
 		vm.details      = details;
@@ -29,18 +32,37 @@
 
 		//------------------------------
 		function activate(){			
-			$ionicLoading.show({
+			/*$ionicLoading.show({
 				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
-			vm.products = query();
-			$scope.$on('cloud:push:notification', function(event, data) {
-		      var msg = data.message;
-		      alert(msg.title + ': ' + msg.text);
-		    });
+			vm.products = query();*/
+		}
+
+		function queryPromise(){
+			return 	Product.query({
+						page: page
+					}).$promise;
 		}
 
 		function query(){
-			Product.query({}, 
+			queryPromise().
+				then(
+					function(data){
+						vm.products = vm.products.concat(data.data);
+						if(vm.products.length == data.meta.pagination.total){
+							vm.loadMore = false;
+						}
+						else{
+							vm.loadMore = true;
+							page++;	
+						}
+						$scope.$broadcast('scroll.infiniteScrollComplete');						
+					}
+				);	
+		}
+
+		function queryAll(){
+			Product.query({},
 				function(data){
 					vm.products = data.data;
 					$ionicLoading.hide();
@@ -48,7 +70,7 @@
 				function(){
 					$ionicLoading.hide();
 				}
-			);
+			);				
 		}
 
 		function addCart(product){

@@ -1,7 +1,7 @@
 <ion-view view-title="Produtos">	
 	<ion-content class="has-footer">
 		<ion-list>
-			<ion-item ng-repeat="product in vm.products">
+			<ion-item collection-repeat="product in vm.products">
 				<div class="row">
 					<div class="col-75" ng-click="vm.addCart(product)">
 						<h2>{{product.name}}</h2>
@@ -11,7 +11,12 @@
 					</div>
 				</div>	
 			</ion-item>
-		</ion-list>		
+		</ion-list>
+		<ion-infinite-scroll
+			ng-if		= "vm.loadMore"
+			on-infinite	= "vm.query()"
+			distance	= "1%">
+		</ion-infinite-scroll>		
 	</ion-content>
 	<ion-footer-bar align-title="left">
 		<h1 class="title">Carrinho: R$ {{vm.cart.total}}</h1>

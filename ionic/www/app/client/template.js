@@ -6,16 +6,17 @@
 		.controller('ClientMenuController', ClientMenuController);
 
 	ClientMenuController.$inject = [
-		'$ionicLoading',
+		'$state', '$ionicLoading',
 		'UserService'
 	];
 
 	function ClientMenuController(
-		$ionicLoading,
+		$state, $ionicLoading,
 		UserService
 	){
 		var vm          = this;
 		vm.user;
+		vm.logout       = logout;
 		vm.activate     = activate;
 
 		
@@ -30,6 +31,10 @@
 			});		
 			vm.user = userGet();
 			$ionicLoading.hide();
+		}
+
+		function logout(){
+			$state.go('logout');
 		}
 
 		function userGet(){

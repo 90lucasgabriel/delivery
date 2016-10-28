@@ -6,10 +6,14 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl   : 'http://192.168.1.105:8000',
-      appTitle  : 'Angular Modular Demo',
-      version   : '1.0.0',
-      pusherKey : 'e9f4f98efe9fc0b14090',
+      baseUrl       : 'http://localhost:8000',
+      appTitle      : 'Angular Modular Demo',
+      version       : '1.0.0',
+      pusherKey     : 'e9f4f98efe9fc0b14090',
+      redirectLogin : {
+        client      : 'client.products.list',
+        deliveryman : 'deliveryman.orders.list'
+      }
   };
 
   core.constant('appConfig', appConfig);

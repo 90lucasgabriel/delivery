@@ -33,6 +33,20 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         throw (new ModelNotFoundException())->setModel(get_class($this->model));
     }
 
+    public function getByIdAndClient($orderId, $clientId){
+        $result = $this
+            ->model
+            ->where('id', $orderId)
+            ->where('client_id', $clientId)
+            ->first();
+        
+        if($result){
+            return $this->parserResult($result);
+        }
+
+        throw (new ModelNotFoundException())->setModel($this->model());
+    }
+
     /**
      * Specify Model class name
      *

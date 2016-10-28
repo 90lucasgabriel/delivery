@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ClientCheckoutController extends Controller{
-    private $with = ['client', 'coupon', 'items'];
     private $orderRepository;
     private $productRepository;
     private $userRepository;
@@ -35,11 +34,10 @@ class ClientCheckoutController extends Controller{
         $orders = $this
             ->orderRepository
             ->skipPresenter(false)
-            ->with($this->with)
             ->scopeQuery(function($query) use($clientId){
                 return $query->where('client_id', '=', $clientId);
             }
-        )->paginate();
+        )->paginate(10);
 
         return $orders;
     }
@@ -52,14 +50,16 @@ class ClientCheckoutController extends Controller{
         $data['client_id'] = $clientId;
         
         $order = $this->orderService->create($data);
-        $order = $this->orderRepository->skipPresenter(false)->with($this->with)->find($order->id);
+        $order = $this->orderRepository->skipPresenter(false)->find($order->id);
 
         return $order;
     }
 
-    public function show($id){
-        $order = $this->orderRepository->skipPresenter(false)->with($this->with)->find($id);
-        return $order;
+    public function show($orderId){
+        $userId = Authorizer::getResourceOwnerId();
+        return $this->orderRepository
+            ->skipPresenter(false)
+            ->getByIdAndClient($orderId, $userId);
     }
 
     public function authenticated(){

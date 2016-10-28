@@ -8,13 +8,13 @@
 	LoginController.$inject = [
 		'$state',
 		'$ionicPopup', '$ionicLoading', 'OAuth', 'OAuthToken',
-		'$localStorage', 'UserService', 'User'
+		'$localStorage', '$redirect', 'UserService', 'User'
 	];
 
 	function LoginController(
 		$state,
 		$ionicPopup, $ionicLoading, OAuth, OAuthToken,
-		$localStorage, UserService, User
+		$localStorage, $redirect, UserService, User
 	){
 		var vm   = this;
 		vm.login = login;
@@ -49,12 +49,7 @@
 				.then(
 					function(userData){
 						UserService.setObject(userData.data);
-						if(userData.data.role=='deliveryman'){
-							$state.go('deliveryman.orders.list');
-						}
-						else{
-							$state.go('client.products.list');	
-						}
+						$redirect.redirectLogin();
 						$ionicLoading.hide();
 					},
 					function(response){

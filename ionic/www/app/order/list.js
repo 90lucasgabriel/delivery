@@ -17,9 +17,13 @@
 		Order
 	){
 		var vm          = this;
+		var page        = 1;
+		vm.loadMore     = true;
 		vm.orders       = [];
 		vm.activate     = activate;
+		vm.queryAll     = queryAll;
 		vm.query        = query;
+		vm.refresh      = refresh;
 		vm.goDetails    = goDetails;
 		vm.showOptions  = showOptions;
 
@@ -28,13 +32,33 @@
 
 		//------------------------------
 		function activate(){			
-			$ionicLoading.show({
-				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
-			});
-			vm.orders = query();
+			
+		}
+
+		function queryPromise(){
+			return 	Order.query({
+						page: page
+					}).$promise;
 		}
 
 		function query(){
+			queryPromise().
+				then(
+					function(data){
+						vm.orders = vm.orders.concat(data.data);
+						if(vm.orders.length == data.meta.pagination.total){
+							vm.loadMore = false;
+						}
+						else{
+							vm.loadMore = true;
+							page++;	
+						}
+						$scope.$broadcast('scroll.infiniteScrollComplete');						
+					}
+				);	
+		}
+
+		function queryAll(){
 			Order.query({
 				orderBy  : 'created_at',
 				sortedBy : 'desc'
@@ -51,6 +75,16 @@
 						$scope.$broadcast('scroll.refreshComplete');
 					}
 				);
+		}
+
+		function refresh(){
+			page 		= 1;
+			vm.orders 	= [];
+			vm.loadMore = true;
+			vm.query();
+			setTimeout(function() {
+				$scope.$broadcast('scroll.refreshComplete');
+			}, 200);
 		}
 
 		function goDetails(order){
