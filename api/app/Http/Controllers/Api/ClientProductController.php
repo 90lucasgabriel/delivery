@@ -14,7 +14,7 @@ class ClientProductController extends Controller{
         $products = $this
             ->productRepository
             ->skipPresenter(false)
-            ->all();
+            ->paginate(10);
 
         return $products;
     }

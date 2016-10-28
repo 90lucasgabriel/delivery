@@ -1,7 +1,7 @@
 <ion-view>
 	<ion-nav-title>Meus Pedidos</ion-nav-title>
 	<ion-content class="has-footer">
-		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="vm.query()">
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="vm.refresh()">
 		</ion-refresher>
 		<ion-list>
 		<ion-item ng-repeat="order in vm.orders">
@@ -14,7 +14,12 @@
 						<div class="col text-right">R$ {{order.total}}</div>
 					</div>	
 			</ion-item>
-		</ion-list>		
+		</ion-list>
+		<ion-infinite-scroll
+			ng-if		= "vm.loadMore"
+			on-infinite	= "vm.query()"
+			distance	= "1%">
+		</ion-infinite-scroll>		
 	</ion-content>
 	<ion-footer-bar align-title="left">
 		<h1 class="title">Carrinho: R$ {{vm.cart.total}}</h1>

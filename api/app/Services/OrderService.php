@@ -6,19 +6,24 @@ use CodeDelivery\Repositories\CouponRepository;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Models\Order;
+use Dmitrovskiy\IonicPush\PushProcessor;
 
 class OrderService{
     private $couponRepository;
     private $orderRepository;
     private $productRepository;
+    private $pushProcessor;
+
     public function __construct(
-        CouponRepository $couponRepository,
-        OrderRepository $orderRepository, 
-        ProductRepository $productRepository
-        ){
-        $this->couponRepository = $couponRepository;
-        $this->orderRepository = $orderRepository;
+        CouponRepository    $couponRepository,
+        OrderRepository     $orderRepository, 
+        ProductRepository   $productRepository,
+        PushProcessor       $pushProcessor
+    ){
+        $this->couponRepository  = $couponRepository;
+        $this->orderRepository   = $orderRepository;
         $this->productRepository = $productRepository;
+        $this->pushProcessor     = $pushProcessor;
     }
 
     public function create(array $data){
@@ -67,10 +72,23 @@ class OrderService{
     public function updateStatus($orderId, $deliverymanId, $status){
         $order = $this->orderRepository->getByIdAndDeliveryman($orderId, $deliverymanId);
         $order->status = $status;
-        if((int)($order->status) == 1 && !$order->hash){
-            $order->hash = md5((new \DateTime())->getTimestamp());
+        switch((int)$status) {
+            case 1:
+                if(!$order->hash){
+                    $order->hash = md5((new \DateTime())->getTimestamp());
+                }
+                $order->save();
+                break;
+            case 2:
+                $user = $order->client->user;
+                $order->save();
+                $this->pushProcessor->notify([$user->device_token], [
+                    'alert', "Seu pedido {$order->id} foi entregue"
+                ]);
+                break;
         }
-        $order->save();
+
+        
 
         return $order;
     }

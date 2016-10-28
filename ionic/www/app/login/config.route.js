@@ -21,6 +21,15 @@
                     controllerAs : 'vm',
                     cache        : false,
                 }
+            },
+            {
+                state: 'logout',
+                config: {
+                    url          : '/logout',
+                    controller   : 'LogoutController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
             }
         ];
     }
