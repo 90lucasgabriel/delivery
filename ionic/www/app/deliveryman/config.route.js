@@ -21,6 +21,11 @@
                     controller   : 'DeliverymanMenuController',
                     controllerAs : 'vm',
                     cache        : false,
+                    data: {
+                      permissions: {
+                        only: ['DELIVERYMAN-ROLE']
+                      }
+                    }
                 }
             },
         ];

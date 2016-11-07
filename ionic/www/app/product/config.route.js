@@ -27,7 +27,8 @@
                     templateUrl  : 'app/product/list.html',
                     controller   : 'ProductListController',
                     controllerAs : 'vm',
-                    cache        : false,
+                    cache        : false
+                    
                 }
             },
             {

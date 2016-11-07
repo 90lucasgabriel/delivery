@@ -21,7 +21,8 @@
 
   //Inject ------------------------------------------
   run.$inject = [
-    '$ionicPlatform', '$ionicPush', 
+    '$rootScope',
+    '$state', '$ionicPlatform', '$ionicPush', 'OAuth', 'authService', 'httpBuffer',
     'appConfig', '$localStorage'
   ];
   
@@ -34,6 +35,10 @@
   oauthTokenLocal.$inject = [
     '$delegate', 
     '$localStorage'
+  ];
+
+  oauthInterceptor.$inject = [
+    '$delegate'
   ];
 
 
@@ -59,6 +64,8 @@
     });
 
     $provide.decorator('OAuthToken', oauthTokenLocal);
+    $provide.decorator('oauthInterceptor', oauthInterceptor);
+
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red')
@@ -82,11 +89,13 @@
         }
       }
     });
+
   } 
 
   function run(
-    $ionicPlatform, $ionicPush,
-    appConfig, $localStorage
+    $rootScope,
+    $state, $ionicPlatform, $ionicPush, OAuth, authService, httpBuffer,
+    appConfig, $localStorage 
   ){
     window.client = new Pusher(appConfig.pusherKey);
 
@@ -137,6 +146,35 @@
     });
     */
 
+
+    $rootScope.$on('event:auth-loginRequired', function(event, data){
+      switch (data.data.error){
+        case 'access_denied':
+          if(!$rootScope.refreshingToken){
+            $rootScope.refreshingToken = OAuth.getRefreshToken();
+          }
+          $rootScope.refreshingToken.then(
+            function(data){
+              authService.loginConfirmed();
+              $rootScope.refreshingToken = null;
+            },
+            function(response){
+              $state.go('logout');
+            }
+          );
+          break;
+
+        case 'invalid_credentials':
+          httpBuffer.rejectAll(data);
+          break;
+          
+        default:
+          $state.go('logout');
+          break;        
+      }
+    });
+
+
   }; 
 
   
@@ -171,6 +209,12 @@
         writable     : true
       }
     });
+    return $delegate;
+  }
+
+
+  function oauthInterceptor($delegate){
+    delete $delegate['responseError'];
     return $delegate;
   }
 

@@ -21,6 +21,11 @@
                     controller   : 'ClientMenuController',
                     controllerAs : 'vm',
                     cache        : false,
+                    data: {
+                      permissions: {
+                        only: ['CLIENT-ROLE']
+                      }
+                    }
                 }
             },
         ];

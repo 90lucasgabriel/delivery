@@ -25,7 +25,6 @@
     //-------------------------------
     function redirectLogin(){
       var user = UserService.getObject();
-      console.log(appConfig.redirectLogin[user.role]);
       $state.go(appConfig.redirectLogin[user.role])
     }
 
