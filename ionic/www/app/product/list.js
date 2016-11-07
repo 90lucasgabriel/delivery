@@ -31,11 +31,16 @@
 
 
 		//------------------------------
+<<<<<<< HEAD
 		function activate(){			
 			/*$ionicLoading.show({
 				template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>'
 			});
 			vm.products = query();*/
+=======
+		function activate(){
+			
+>>>>>>> 23-permission
 		}
 
 		function queryPromise(){
