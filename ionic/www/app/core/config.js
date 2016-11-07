@@ -21,12 +21,8 @@
 
   //Inject ------------------------------------------
   run.$inject = [
-<<<<<<< HEAD
-    '$ionicPlatform', '$ionicPush', 
-=======
     '$rootScope',
     '$state', '$ionicPlatform', '$ionicPush', 'OAuth', 'authService', 'httpBuffer',
->>>>>>> 23-permission
     'appConfig', '$localStorage'
   ];
   
