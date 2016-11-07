@@ -89,13 +89,6 @@
         }
       }
     });
-<<<<<<< HEAD
-  } 
-
-  function run(
-    $ionicPlatform, $ionicPush,
-    appConfig, $localStorage
-=======
 
   } 
 
@@ -103,7 +96,7 @@
     $rootScope,
     $state, $ionicPlatform, $ionicPush, OAuth, authService, httpBuffer,
     appConfig, $localStorage 
->>>>>>> 23-permission
+
   ){
     window.client = new Pusher(appConfig.pusherKey);
 
@@ -154,8 +147,6 @@
     });
     */
 
-<<<<<<< HEAD
-=======
 
     $rootScope.$on('event:auth-loginRequired', function(event, data){
       switch (data.data.error){
@@ -184,8 +175,6 @@
       }
     });
 
-
->>>>>>> 23-permission
   }; 
 
   
