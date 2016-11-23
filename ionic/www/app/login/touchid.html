@@ -1,0 +1,19 @@
+<ion-view view-title="TouchID">
+	<ion-nav-title>TouchID</ion-nav-title>
+	<form name="form" ng-submit="vm.login()">
+		<div class="padding">
+			<md-input-container class="md-block white" flex-gt-sm>
+				<label>Usuário</label>
+				<input ng-model="vm.user.username"  type="email" required md-no-asterisk="true">
+			</md-input-container>
+			<md-input-container class="md-block white" flex-gt-sm>
+				<label>Senha</label>
+				<input ng-model="vm.user.password"  type="password"  required md-no-asterisk="true">
+			</md-input-container>				
+		</div>
+		<div class="padding">
+			<md-button type="submit" class="white full-width">Adicionar Suporte</md-button>
+		</div>
+	</form>
+	
+</ion-view>

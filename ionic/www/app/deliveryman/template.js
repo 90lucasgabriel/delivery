@@ -14,10 +14,10 @@
 		$ionicLoading,
 		UserService
 	){
-		var vm          = this;
+		var vm          	= this;
 		vm.user;
-		vm.activate     = activate;
-
+		vm.activate     	= activate;
+		vm.supportTouchID 	= false;
 		
 
 		activate();
@@ -30,6 +30,14 @@
 			});		
 			vm.user = userGet();
 			$ionicLoading.hide();
+
+			if(ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.isIPad()){
+				$cordovaTouchID.checkSupport().then(
+					function(){
+						vm.supportTouchID = true;
+					}
+				);
+			}
 		}
 
 		function userGet(){

@@ -30,6 +30,26 @@
                     controllerAs : 'vm',
                     cache        : false,
                 }
+            },
+            {
+                state: 'client.touchid',
+                config: {
+                    url          : '/touchid',
+                    templateUrl  : 'app/login/touchid.html',
+                    controller   : 'TouchIDController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
+            },
+            {
+                state: 'deliveryman.touchid',
+                config: {
+                    url          : '/touchid',
+                    templateUrl  : 'app/login/touchid.html',
+                    controller   : 'TouchIDController',
+                    controllerAs : 'vm',
+                    cache        : false,
+                }
             }
         ];
     }

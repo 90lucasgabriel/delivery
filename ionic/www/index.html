@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/">
+  <base href="./">
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title></title>
 
-  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
 
 
   <!-- 3rd-party -->
   <!--<link href="lib/ionic-material-design-lite/dist/css/ionic.material-design-lite.min.css" rel="stylesheet">-->
   <!-- Angular Material -->
   <link rel="stylesheet" href="lib/angular-material/angular-material.css">
-
+  <link rel="stylesheet" href="css/ionic.app.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body use-material-icons ng-app="app">    
 
@@ -26,7 +25,7 @@
   <script src="lib/jquery.easing/js/jquery.easing.min.js"></script>
 
   <script src="lib/ionic/js/ionic.bundle.js"></script>
-  <script src="lib/ionic.cloud.min.js"></script>
+  <script src="ionic.cloud.min.js"></script>
   <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
   <script src="lib/angular-cookies/angular-cookies.min.js"></script>
   <script src="lib/query-string/query-string.js"></script>
@@ -104,6 +103,7 @@
   <script src="app/login/config.route.js"></script>
   <script src="app/login/login.js"></script>
   <script src="app/login/logout.js"></script>
+  <script src="app/login/touchid.js"></script>
 
   <!-- menu module 
   <script src="app/menu/menu.module.js"></script>
@@ -147,6 +147,7 @@
   <!-- service module -->
   <script src="app/common/services/service.module.js"></script>
   <script src="app/common/services/redirect.js"></script>
+  <script src="app/common/services/auth.js"></script>
 
   <!-- templates -->
   <script src="app/common/templates/order-bottom-sheet.js"></script>

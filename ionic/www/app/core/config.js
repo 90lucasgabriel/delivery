@@ -6,7 +6,7 @@
   core.config(configure);
 
   var appConfig = {
-      baseUrl       : 'http://localhost:8000',
+      baseUrl       : 'http://45.55.71.110',
       appTitle      : 'Angular Modular Demo',
       version       : '1.0.0',
       pusherKey     : 'e9f4f98efe9fc0b14090',

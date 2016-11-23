@@ -3,18 +3,18 @@
 
 	angular
 		.module('app.login')
-		.controller('LoginController', LoginController);
+		.controller('TouchIDController', TouchIDController);
 
-	LoginController.$inject = [
+	TouchIDController.$inject = [
 		'$ionicPopup',
-		'$cordovaTouchID', '$cordovaKeychain',
-		'$auth'
+		'$cordovaTouchID', 'OAuth',
+		'$auth', 'UserService'
 	];
 
-	function LoginController(
+	function TouchIDController(
 		$ionicPopup,
-		$cordovaTouchID, $cordovaKeychain,
-		$auth
+		$cordovaTouchID, OAuth,
+		$auth, UserService
 	){
 		var vm            = this;
 		vm.supportTouchID = false;
@@ -22,18 +22,10 @@
 		vm.loginTouchID   = loginTouchID;
 
 
-
-		//------------------------------
-		vm.user = {
-			username: '',
-			password: ''
-		};
-
-
 		activate();
 
 
-
+		//------------------------------
 		function activate(){
 			if(ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.isIPad()){
 				$cordovaTouchID.checkSupport().then(
@@ -44,20 +36,41 @@
 			}
 		}
 
-  
-		//------------------------------
 		function login(){
-			$auth.login(vm.user);		
+			vm.user.username = UserService.getObject().email;
+			var token = OAuth.getAccessToken(vm.user)
+
+			token
+				.then(function(){
+					return Keychain.set('username', 'delivery_ionic', vm.user.username);
+				})
+				.then(function(password){
+					vm.user.password = password;
+					return Keychain.set('password', 'delivery_ionic', vm.user.password);
+				})
+				.then(function(){
+					$ionicPopup.alert({
+		              title: 'TouchID',
+		              template: 'TouchID Habilitado'
+		            });
+				},
+					function(){
+						$ionicPopup.alert({
+			              title: 'Autenticação',
+			              template: 'Login e/ou Senha inválidos.'
+			            });
+					}
+				);
 		}
 
 		function loginTouchID(){
 			if(vm.supportTouchID){				
 				$cordovaTouchID.authenticate("Autenticação com a Digital").then(function() {
-					var keyChain = $cordovaKeychain.getForKey('username', 'delivery_ionic');
+					var keyChain = $cordovaKeychain.get('username', 'delivery_ionic');
 					keyChain
 						.then(function(username){
 							vm.user.username = username;
-							return $cordovaKeychain.getForKey('password', 'delivery_ionic');
+							return $cordovaKeychain.get('password', 'delivery_ionic');
 						})
 						.then(function(password){
 							vm.user.password = password;

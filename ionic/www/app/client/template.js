@@ -16,9 +16,9 @@
 	){
 		var vm          = this;
 		vm.user;
-		vm.logout       = logout;
-		vm.activate     = activate;
-
+		vm.logout       	= logout;
+		vm.activate     	= activate;
+		vm.supportTouchID	= true;
 		
 
 		activate();
@@ -31,6 +31,14 @@
 			});		
 			vm.user = userGet();
 			$ionicLoading.hide();
+
+			if(ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.isIPad()){
+				$cordovaTouchID.checkSupport().then(
+					function(){
+						vm.supportTouchID = true;
+					}
+				);
+			}
 		}
 
 		function logout(){

@@ -7,14 +7,12 @@
 
 	LogoutController.$inject = [
 		'$state',
-		'$ionicPopup', '$ionicLoading', '$ionicHistory', 'OAuth', 'OAuthToken',
-		'UserService'
+		'$auth'
 	];
 
 	function LogoutController(
 		$state,
-		$ionicPopup, $ionicLoading, $ionicHistory, OAuth, OAuthToken,
-		UserService
+		$auth
 	){
 		var vm   = this;
 
@@ -24,14 +22,7 @@
   
 		//------------------------------
 		function activate(){
-			OAuthToken.removeToken();
-			UserService.set(null);
-			$ionicHistory.clearCache();
-			$ionicHistory.clearHistory();
-			$ionicHistory.nextViewOptions({
-				disableBack: true,
-				historyRoot: true,
-			});
+			$auth.logout();
 			$state.go('login');
 		}
 
