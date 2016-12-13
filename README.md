@@ -2,10 +2,7 @@
 This is a sample Laravel + Ionic + Cordova application.
 Make sure you have PHP, MySQL, Apache and NodeJS installed.
 
-Install typecript
-```
-$ npm install -g typescript
-```
+
 Install Ionic CLI
 ```
 $ npm install -g ionic
@@ -18,6 +15,7 @@ Clone this repo
 ```
 $ git clone https://github.com/90lucasgabriel/delivery
 ```
+
 
 ## API Laravel
 cd into the api folder
@@ -32,7 +30,7 @@ $ php artisan key:generate
 ```
 Create database
 
-Insert into .env: database, user and password.
+Insert into .env: database, user, password, Pusher settings and Ionic.io settings.
 
 Seed database
 ```
