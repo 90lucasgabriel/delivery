@@ -63,3 +63,12 @@ Serve the app
 $ ionic serve
 ```
 Head to `http://localhost:8100` in your browser and you'll see the app running
+
+## Default Users
+#### User
+username: user@email.com
+password: 123456
+
+#### Deliveryman
+username: deliveryman@email.com
+password: 123456
